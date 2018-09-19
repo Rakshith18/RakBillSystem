@@ -34,6 +34,7 @@ class SalesController extends Controller
             $sales = new Salescart();
             $sales->product_id = $request->product_id;
             $sales->quantity = $request->sales_quantity;
+            // if($sales->quantity<)
             $total=$request->price * $request->sales_quantity;
             $taxPer=$request->tax*$total;
             $taxAmt=$taxPer/100;
@@ -46,12 +47,12 @@ class SalesController extends Controller
                 $product = Product::find($request->product_id);
                 $product->stock = $product->stock - $request->sales_quantity;
                 if ($product->update()) {
-                    return response(['success_message' => 'SuccessFully Make sales']);
+                    return response(['success_message' => 'Successfully Made Sales']);
                 }
             }
 
         } else {
-            return response(['error_message' => 'Filed To Make sales']);
+            return response(['error_message' => 'Failed To Make Sales']);
         }
     }
 
@@ -162,7 +163,7 @@ class SalesController extends Controller
             Sale::create($od);
         }
         DB::table('salescarts')->delete();
-        return redirect()->back()->with('success_message', 'Successfuly Clear Your Bucket and Sales Item store in Sales Record');
+        return redirect()->back()->with('success_message', 'Successfuly Cleared Your Bucket and Sales Item store in Sales Record');
 
     }
      public function editcart($id)
@@ -186,9 +187,9 @@ class SalesController extends Controller
         $pc->updated_at = date('Y-m-d H:i:s');
         $message = $pc->update();
         if ($message) {
-            return redirect()->route('productcategory.list')->with('success_message', 'successfully updated');
+            return redirect()->route('productcategory.list')->with('success_message', 'Successfully Updated');
         } else {
-            return redirect()->route('productcategory.update')->with('error_message', 'failed to  update');
+            return redirect()->route('productcategory.update')->with('error_message', 'Failed to Update');
         }
     }
 
@@ -199,7 +200,7 @@ class SalesController extends Controller
         $product->stock = $product->stock + $salescart->quantity;
         if ($product->update()) {
             $salescart->delete();
-            return redirect()->back()->with('success_message', 'Seccessfully deleted Item');
+            return redirect()->back()->with('success_message', 'Seccessfully Deleted Item');
         }else {
             return redirect()->back()->with('error_messsage', 'Failed To Delete Item');
         }

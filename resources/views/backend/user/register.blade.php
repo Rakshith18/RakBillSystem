@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="{{asset('images/user.png')}}" rel="icon" type="image/x-icon"/>
     <link href="{{asset('images/user.png')}}" rel="shortcut icon" type="image/x-icon"/>
-    <title>R2k Billing System user Registration</title>
+    <title>R2k Billing System | New Register</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="{{asset('backend/login/css/bootstrap.min.css')}}"/>
     <link rel="stylesheet" href="{{asset('backend/login/css/bootstrap-responsive.min.css')}}"/>
@@ -97,7 +97,7 @@
         </div>
         <div class="form-actions">
             <span class="pull-left"><a href="{{route('user.dashboard')}}" class="flip-link btn btn-info">Back to Dashboard </a></span>
-            <span class="pull-right"><button type="submit" name="btnSave" class="btn btn-success"> New Registeration</button></span>
+            <span class="pull-right"><button type="submit" name="btnSave" class="btn btn-success"> Register Now</button></span>
         </div>
     </form>
 </div>

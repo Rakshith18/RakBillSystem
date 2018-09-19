@@ -23,14 +23,17 @@
                     </div>
                 </div>
             </div>
+           
             <div class="clearfix"></div>
             @if(Session::has('success_message'))
-                <div class="alert alert-success">
+                <div class="alert alert-success alert-block">
+                    <button type="button" class="close" data-dismiss="alert"> x </button>
                     {{ Session::get('success_message') }}
                 </div>
             @endif
             @if(Session::has('error_message'))
-                <div class="alert alert-danger">
+                <div class="alert alert-danger alert-block">
+                    <button type="button" class="close" data-dismiss="alert"> x </button>
                     {{ Session::get('error_message') }}
                 </div>
             @endif
@@ -60,10 +63,10 @@
                             <table class="table table-responsive">
                                 <thead>
                                 <tr>
-                                    <th>S.N.</th>
+                                    <th>Sl.No.</th>
                                     <th>Role Name</th>
-                                    <th>created_date</th>
-                                    <th>updated_date</th>
+                                    <th>Created Date</th>
+                                    <th>Updated Date</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>

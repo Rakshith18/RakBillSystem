@@ -67,7 +67,7 @@ class ProductController extends Controller
             'created_at' => date('Y-m-d H:i:s'),
         ]);
         if ($message) {
-            return redirect()->route('product.list')->with('success_message', 'successfully created ');
+            return redirect()->route('product.list')->with('success_message', 'Product Successfully Added ');
         } else {
             return redirect()->route('product.create')->with('error_message', 'Failed To create');
         }
@@ -111,9 +111,6 @@ class ProductController extends Controller
             'productcategory_id' => 'required',
             'name' => 'required',
             'code' => 'required',
-            'quantity' => 'required',
-            'measure'=>'required',
-            'stock' => 'required',
             'price' => 'required',
             'tax' => 'required',
         ]);
@@ -121,9 +118,6 @@ class ProductController extends Controller
         $pc->productcategory_id = $request->productcategory_id;
         $pc->name = $request->name;
         $pc->code = $request->code;
-        $pc->quantity = $request->quantity;
-        $pc->measure = $request->measure;
-        $pc->stock = $request->stock;
         $pc->price = $request->price;
         $pc->tax = $request->tax;
         $pc->status = $request->status;
@@ -131,9 +125,9 @@ class ProductController extends Controller
         $pc->updated_at = date('Y-m-d H:i:s');
         $message = $pc->update();
         if ($message) {
-            return redirect()->route('product.list')->with('success_message', 'successfully updated');
+            return redirect()->route('product.list')->with('success_message', 'Product Successfully Updated');
         } else {
-            return redirect()->route('product.update')->with('error_message', 'failed to  update');
+            return redirect()->route('product.update')->with('error_message', 'Failed to Update');
         }
     }
 
@@ -152,9 +146,9 @@ class ProductController extends Controller
             $product = Product::find($id);
             $message = $product->delete();
             if ($message) {
-                return redirect()->route('product.list')->with('success_message', 'successfully Deleted');
+                return redirect()->route('product.list')->with('success_message', 'Product Successfully Deleted');
             } else {
-                return redirect()->route('product.update')->with('error_message', 'failed to  Delete');
+                return redirect()->route('product.update')->with('error_message', 'Failed to Delete');
             }
         }
     }
@@ -174,9 +168,22 @@ class ProductController extends Controller
         $pc->stock = $pc->stock + $request->stock;
         $pc->quantity = $pc->quantity + $request->stock;
         if ($pc->update()) {
-            return redirect()->route('product.list')->with('success_message', 'successfully updated Your Stock');
+            return redirect()->route('product.list')->with('success_message', 'Successfully Updated Your Stock');
         } else {
-            return redirect()->route('stock.update')->with('error_message', 'failed to  update');
+            return redirect()->route('stock.update')->with('error_message', 'Failed to Update');
+        }
+    }
+
+      public function stockclear(Request $request, $id)
+    {
+        $pc = Product::find($id);
+        $pc->quantity = 0;
+        $pc->stock = 0;
+       
+        if ($pc->update()) {
+            return redirect()->route('product.list')->with('success_message', 'Successfully Cleared the Stock');
+        } else {
+            return redirect()->route('product.update')->with('error_message', 'Failed to Clear Stock');
         }
     }
 }

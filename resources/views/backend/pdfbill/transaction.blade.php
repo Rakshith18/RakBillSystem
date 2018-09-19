@@ -10,12 +10,12 @@
 <table border="1" align="center" cellpadding="5">
     <thead>
     <tr>
-        <th>S.N.</th>
+        <th>Sl.No.</th>
         <th>Total Amount</th>
         <th>Deposite Amount</th>
-        <th>Remaining to Deposite</th>
-        <th>Deposite by</th>
-        <th>Deposite Date</th>
+        <th>Remaining Amt to Deposite</th>
+        <th>Deposited By</th>
+        <th>Deposited Date</th>
         <th>Bank Name</th>
     </tr>
     </thead>

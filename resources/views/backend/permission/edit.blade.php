@@ -17,7 +17,7 @@
                     <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                         <div class="col-md-5 col-sm-5 col-xs-12 form-group top_search" style="padding-left: 90px;">
                             <div class="input-group">
-                                <a href="{{route('permission.list')}}" class="btn btn-success">View permission</a>
+                                <a href="{{route('permission.list')}}" class="btn btn-success">View Permission</a>
                             </div>
                         </div>
                     </div>

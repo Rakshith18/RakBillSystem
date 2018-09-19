@@ -24,24 +24,27 @@
                     </div>
                 </div>
             </div>
+            
             <div class="clearfix"></div>
-
             @if(Session::has('success_message'))
-                <div class="alert alert-success">
-                    {{ Session::get('success_message') }}<div id="msg"></div>
+                <div class="alert alert-success alert-block">
+                    <button type="button" class="close" data-dismiss="alert"> x </button>
+                    {{ Session::get('success_message') }}
                 </div>
             @endif
             @if(Session::has('error_message'))
-                <div class="alert alert-danger">
+                <div class="alert alert-danger alert-block">
+                    <button type="button" class="close" data-dismiss="alert"> x </button>
                     {{ Session::get('error_message') }}
                 </div>
             @endif
+
             <div class="resp"></div>
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>sales Product</h2>
+                            <h2>Sales Product</h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
@@ -64,7 +67,7 @@
                             <form id="btnSave" action="{{route('sales.store')}}" method="POST">
                                 {{ csrf_field()}}
                                 <div class="form-group">
-                                    <label for="product_id">choose Product</label>
+                                    <label for="product_id">Choose Product</label>
                                     <select class="form-control js-example-basic-single" id="product_id" name="product_id" data-placeholder="--Search Product--" required>
                                     </select>
                                     <span class="error"><b>
@@ -82,7 +85,7 @@
                                          @endif</b></span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="price">Price Per/Measure *</label>
+                                    <label for="price">Price per/Measure *</label>
                                     <input type="number" class="form-control" name="price" id="price" placeholder="price" required>
                                     <span class="error"><b>
                                          @if($errors->has('price'))
@@ -106,13 +109,13 @@
                                          @endif</b></span>
                                 </div>
                                 <div class="form-group">
-                                    <label>Sales Status:- &nbsp;</label>
+                                    <label>Sales Status :- &nbsp;</label>
                                     <input type="radio" name="sales_status" value="1" id="Active" checked=""><label for="Active"> Cash Sales </label>
                                     <input type="radio" name="sales_status" id="deactive" value="0"><label for="deactive"> Credit Sales </label>
                                 </div>
                                 <!-- /.box-body -->
                                 <div class="box-footer">
-                                    <button type="submit" name="btnSave" class="btn btn-primary">MakeSales</button>
+                                    <button type="submit" name="btnSave" class="btn btn-primary">Make Sales</button>
                                 </div>
                             </form>
                             <br><br>
@@ -153,8 +156,10 @@
             format: 'yyyy-mm-dd'
         });
     </script>
+
     <script type="text/javascript">
         $(document).ready(function () {
+
             $('#product_id').on('change', function () {
                 var prdid = $(this).val();
                 var path = 'getquantity';

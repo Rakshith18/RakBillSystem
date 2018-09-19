@@ -23,14 +23,17 @@
                     </div>
                 </div>
             </div>
+            
             <div class="clearfix"></div>
             @if(Session::has('success_message'))
-                <div class="alert alert-success">
+                <div class="alert alert-success alert-block">
+                    <button type="button" class="close" data-dismiss="alert"> x </button>
                     {{ Session::get('success_message') }}
                 </div>
             @endif
             @if(Session::has('error_message'))
-                <div class="alert alert-danger">
+                <div class="alert alert-danger alert-block">
+                    <button type="button" class="close" data-dismiss="alert"> x </button>
                     {{ Session::get('error_message') }}
                 </div>
             @endif
@@ -38,7 +41,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Remaining to paid Purchase Details</h2>
+                            <h2>Remaining to be Paid Purchase Details</h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
@@ -60,7 +63,7 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="categorytable">
                                 <thead>
                                 <tr>
-                                    <th>S.N.</th>
+                                    <th>Sl.No.</th>
                                     <th>Goods Name</th>
                                     <th>Party Name</th>
                                     <th>Total Amount</th>
@@ -86,17 +89,17 @@
                                         <td> {{$pc->created_by}}</td>
                                         <td>
                                             @if($pc->status == 'vat')
-                                                <span class="label label-success"> vat </span>
+                                                <span class="label label-success"> Vat </span>
                                             @endif
                                             @if($pc->status == 'pan')
-                                                <span class="label label-success"> pan </span>
+                                                <span class="label label-success"> Pan </span>
                                             @endif
                                             @if($pc->status == 'normal')
-                                                <span class="label label-success"> normal </span>
+                                                <span class="label label-success"> Normal </span>
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{route('purchase.update',$pc->id)}}" class="btn btn-info" onclick="return confirm('Do You Pay Due Amount?????')"><i class="fa fa-check-circle"></i> Clear Paid</a>
+                                            <a href="{{route('purchase.update',$pc->id)}}" class="btn btn-info" onclick="return confirm('Do You Pay Due Amount?????')"><i class="fa fa-check-circle"></i> Clear Paid Bill</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -176,7 +179,7 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="categorytable">
                                 <thead>
                                 <tr>
-                                    <th>S.N.</th>
+                                    <th>Sl.No.</th>
                                     <th>Goods Name</th>
                                     <th>Party Name</th>
                                     <th>Total Amount</th>

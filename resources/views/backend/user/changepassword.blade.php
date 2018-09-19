@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="{{asset('images/user.png')}}" rel="icon" type="image/x-icon"/>
     <link href="{{asset('images/user.png')}}" rel="shortcut icon" type="image/x-icon"/>
-    <title>Change Password </title>
+    <title>R2k Billing System | Change Password </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="{{asset('backend/login/css/bootstrap.min.css')}}"/>
     <link rel="stylesheet" href="{{asset('backend/login/css/bootstrap-responsive.min.css')}}"/>
@@ -22,16 +22,20 @@
 </head>
 <body style="background-color: #ffffff;">
 <div id="loginbox">
-    @if(Session::has('success_message'))
-        <div class="alert alert-success">
-            {{ Session::get('success_message') }}
-        </div>
-    @endif
-    @if(Session::has('error_message'))
-        <div class="alert alert-danger">
-            {{ Session::get('error_message') }}
-        </div>
-    @endif
+     <div class="clearfix"></div>
+            @if(Session::has('success_message'))
+                <div class="alert alert-success alert-block">
+                    <button type="button" class="close" data-dismiss="alert"> x </button>
+                    {{ Session::get('success_message') }}
+                </div>
+            @endif
+            @if(Session::has('error_message'))
+                <div class="alert alert-danger alert-block">
+                    <button type="button" class="close" data-dismiss="alert"> x </button>
+                    {{ Session::get('error_message') }}
+                </div>
+            @endif
+   
     <form class="form-vertical" action="{{route('change.save')}}" method="post">
         {{csrf_field()}}
         <div class="control-group normal_text"><h3><img src="{{asset('images/user.png')}}" height="100px" width="100px" alt="Logo"/></h3></div>

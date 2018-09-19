@@ -60,11 +60,11 @@
                             <table class="table table-responsive">
                                 <thead>
                                 <tr>
-                                    <th>S.N.</th>
+                                    <th>Sl.No.</th>
                                     <th>Module Name</th>
                                     <th>Module Key</th>
                                     <th>Module URL</th>
-                                    <th>View Sidebar</th>
+                                    <th>Sidebar</th>
                                     <th>created_date</th>
                                     <th>updated_date</th>
                                     <th>Action</th>

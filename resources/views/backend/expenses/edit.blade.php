@@ -23,14 +23,17 @@
                     </div>
                 </div>
             </div>
+            
             <div class="clearfix"></div>
             @if(Session::has('success_message'))
-                <div class="alert alert-success">
+                <div class="alert alert-success alert-block">
+                    <button type="button" class="close" data-dismiss="alert"> x </button>
                     {{ Session::get('success_message') }}
                 </div>
             @endif
             @if(Session::has('error_message'))
-                <div class="alert alert-danger">
+                <div class="alert alert-danger alert-block">
+                    <button type="button" class="close" data-dismiss="alert"> x </button>
                     {{ Session::get('error_message') }}
                 </div>
             @endif
@@ -76,15 +79,15 @@
                                          @endif</b></span>
                                 </div>
                                 <div class="form-group">
-                                <label for="totalamount">Total Amount*</label>
+                                <label for="totalamount">Total Amount *</label>
                                     <input type="number" class="form-control" value="{{$expenses->totalamount}}" name="totalamount" id="totalamount" placeholder="Enter totalamount">
                                     <span class="error"><b>
                                          @if($errors->has('totalamount'))
                                                 {{$errors->first('totalamount')}}
                                          @endif</b></span>
                                 </div>
-                                <div class="form-group">
-                                    <label for="paidamount">Paid Amount*</label>
+                                <div class="form-group"> 
+                                    <label for="paidamount">Paid Amount *</label>
                                     <input type="number" class="form-control" value="{{$expenses->paidamount}}" name="paidamount" id="paidamount" placeholder="Enter paidamount">
                                     <span class="error"><b>
                                          @if($errors->has('paidamount'))
@@ -92,7 +95,7 @@
                                          @endif</b></span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="product_name">Product Name*</label>
+                                    <label for="product_name">Product Name *</label>
                                     <input type="text" class="form-control" name="product_name" value="{{$expenses->product_name}}" id="product_name" placeholder="Enter product_name">
                                     <span class="error"><b>
                                          @if($errors->has('product_name'))

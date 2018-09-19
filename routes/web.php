@@ -70,6 +70,7 @@ Route::group(['middleware' => 'Revalidate'],function() {
         Route::post('/product-update/{id}', ['as' => 'product.update', 'uses' => 'backend\ProductController@update']);
         Route::get('/stock-edit/{id}/edit', ['as' => 'stock.edit', 'uses' => 'backend\ProductController@stockedit']);
         Route::post('/stock-update/{id}', ['as' => 'stock.update', 'uses' => 'backend\ProductController@stockupdate']);
+        Route::post('/stock-clear/{id}', ['as' => 'stock.clear', 'uses' => 'backend\ProductController@stockclear']);
 
         Route::get('/sales-create', ['as' => 'sales.create', 'uses' => 'backend\SalesController@create']);
         Route::post('/sales-store', ['as' => 'sales.store', 'uses' => 'backend\SalesController@store']);

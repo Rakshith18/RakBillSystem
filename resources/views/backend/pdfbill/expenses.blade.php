@@ -10,14 +10,14 @@
 <table border="1" width="100%" class="table table-striped table-bordered table-hover" id="categorytable">
     <thead>
     <tr>
-        <th>S.N.</th>
+        <th>Sl.No.</th>
         <th>Expenses Name</th>
         <th>Party Name</th>
         <th>Total Amount</th>
         <th>Paid Amount</th>
         <th>Due Amount</th>
         <th>Product Name</th>
-        <th> Date</th>
+        <th>Date</th>
     </tr>
     </thead>
     <tbody>

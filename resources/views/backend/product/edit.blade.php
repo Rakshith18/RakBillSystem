@@ -24,14 +24,16 @@
                 </div>
             </div>
 
-            <div class="clearfix"></div>
+           <div class="clearfix"></div>
             @if(Session::has('success_message'))
-                <div class="alert alert-success">
+                <div class="alert alert-success alert-block">
+                    <button type="button" class="close" data-dismiss="alert"> x </button>
                     {{ Session::get('success_message') }}
                 </div>
             @endif
             @if(Session::has('error_message'))
-                <div class="alert alert-danger">
+                <div class="alert alert-danger alert-block">
+                    <button type="button" class="close" data-dismiss="alert"> x </button>
                     {{ Session::get('error_message') }}
                 </div>
             @endif
@@ -62,9 +64,9 @@
                             <form action="{{route('product.update',$product->id)}}" method="post">
                                 {{ csrf_field()}}
                                 <div class="form-group">
-                                    <label for="productcategory_id">choose ProductCategory</label>
+                                    <label for="productcategory_id">Choose Product Category</label>
                                     <select class="form-control" id="productcategory_id" name="productcategory_id">
-                                        <option value="">--Select Productcategory--</option>
+                                        <option value="">-- Select ProductCategory --</option>
                                         @foreach($productcategory as $d)
                                             @if($d->id == $product->productcategory_id)
                                                 <option value="{{$d->id}}" selected="">{{$d->name}}</option>
@@ -99,29 +101,14 @@
                                 </div>
                                  <div class="form-group">
                                     <label for="Measure">Measure *</label>
-                                    <select class="form-control" id="measure" name="measure">
-                                        <option value="">-- Select Measure --</option>
-                                        <option value="unit">Unit</option>
-                                        <option value="kg">Kilo Grams</option>
-                                        <option value="ltr">Litre</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="quantity">Quantity*</label>
-                                    <input type="number" value="{{$product->quantity}}" class="form-control" id="quantity" name="quantity" placeholder="Enter quantity">
+                                    <input type="text" value="{{$product->measure}}" class="form-control" id="measure" name="measure" placeholder="" disabled="">
                                     <span class="error"><b>
-                                         @if($errors->has('quantity'))
-                                                {{$errors->first('quantity')}}
-                                            @endif</b></span>
+                                           @if($errors->has('measure'))
+                                                {{$errors->first('measure')}}
+                                            @endif</b>
+                                     </span>
                                 </div>
-                                <div class="form-group">
-                                    <label for="stock">Stock*</label>
-                                    <input type="number" value="{{$product->stock}}" class="form-control" id="stock" name="stock" placeholder="Enter Available Stock">
-                                    <span class="error"><b>
-                                         @if($errors->has('stock'))
-                                                {{$errors->first('stock')}}
-                                            @endif</b></span>
-                                </div>
+                               
                                 <div class="form-group">
                                     <label for="price">Price*</label>
                                     <input type="number" value="{{$product->price}}" class="form-control" id="price" name="price" placeholder="Enter price per Item">

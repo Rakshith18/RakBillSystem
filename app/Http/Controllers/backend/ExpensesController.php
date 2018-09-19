@@ -60,9 +60,9 @@ class ExpensesController extends Controller
         $exp->created_by = Auth::user()->username;
         $exp->created_at = date('Y-m-d H:i:s');
         if ($exp->save()) {
-            return back()->with('success_message', 'Success Fully created');
+            return back()->with('success_message', 'Successfully Created');
         } else {
-            return back()->with('error_message', 'Failed To create');
+            return back()->with('error_message', 'Failed To Create');
         }
     }
 
@@ -117,9 +117,9 @@ class ExpensesController extends Controller
         $expenses->modified_by = Auth::user()->username;
         $expenses->updated_at = date('Y-m-d H:i:s');
         if ($expenses->update()) {
-            return redirect()->route('expenses.list')->with('success_message', 'successfully updated');
+            return redirect()->route('expenses.list')->with('success_message', 'Successfully Updated');
         } else {
-            return redirect()->route('expenses.update')->with('error_message', 'failed to  update');
+            return redirect()->route('expenses.update')->with('error_message', 'Failed to Update');
         }
     }
 
@@ -138,9 +138,9 @@ class ExpensesController extends Controller
             $staff = Expense::find($id);
             $message = $staff->delete();
             if ($message) {
-                return redirect()->route('expenses.list')->with('success_message', 'successfully Deleted');
+                return redirect()->route('expenses.list')->with('success_message', 'Successfully Deleted');
             } else {
-                return redirect()->route('expenses.update')->with('error_message', 'failed to  Delete');
+                return redirect()->route('expenses.update')->with('error_message', 'Failed to Delete');
             }
         }
     }
@@ -160,9 +160,9 @@ class ExpensesController extends Controller
             'name' => $request->name,
         ]);
         if ($message) {
-            return back()->with('success_message', 'Success Fully created');
+            return back()->with('success_message', 'Successfully Created');
         } else {
-            return back()->with('error_message', 'Failed To create');
+            return back()->with('error_message', 'Failed To Create');
         }
     }
     public function export()

@@ -63,7 +63,7 @@ class UserController extends Controller
                 'role_id' => $request->role,
                 'user_id' => $message->id
             ]);
-            return redirect()->route('user.register')->with('success_message', 'You are successfully register');
+            return redirect()->route('user.register')->with('success_message', 'You are successfully registered');
         } else {
             return redirect()->route('user.register')->with('error_message', 'You can not register ');
         }
@@ -122,7 +122,7 @@ class UserController extends Controller
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
             Auth::user()->last_login = date('Y-m-d H:i:s');
             Auth::user()->save();
-            return redirect()->route('user.dashboard')->with('success_message', 'You are success fully loged In');
+            return redirect()->route('user.dashboard')->with('success_message', 'Successfully loged In');
         } else {
             return redirect()->route('user.login')->with('error_message', 'Invalid Username or Password');
         }

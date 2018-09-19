@@ -23,14 +23,17 @@
                     </div>
                 </div>
             </div>
+            
             <div class="clearfix"></div>
             @if(Session::has('success_message'))
-                <div class="alert alert-success">
+                <div class="alert alert-success alert-block">
+                    <button type="button" class="close" data-dismiss="alert"> x </button>
                     {{ Session::get('success_message') }}
                 </div>
             @endif
             @if(Session::has('error_message'))
-                <div class="alert alert-danger">
+                <div class="alert alert-danger alert-block">
+                    <button type="button" class="close" data-dismiss="alert"> x </button>
                     {{ Session::get('error_message') }}
                 </div>
             @endif
@@ -60,17 +63,17 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="categorytable">
                                 <thead>
                                 <tr>
-                                    <th>S.N.</th>
+                                    <th>Sl.No.</th>
                                     <th>Category Name</th>
                                     <th>Name</th>
                                     <th>Code</th>
                                     <th>Quantity</th>
-                                    <th>stock</th>
+                                    <th>Stock</th>
                                     <th>Price</th>
                                     <th>Tax</th>
-                                    <th>status</th>
-                                    <th>created_by</th>
-                                    <th>modified_by</th>
+                                    <th>Status</th>
+                                    <th>Created By</th>
+                                    <th>Modified By</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>

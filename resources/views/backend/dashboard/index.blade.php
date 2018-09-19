@@ -57,16 +57,19 @@
             </div><!--/.col-->
         </div>
         <!-- /top tiles -->
-        @if(Session::has('success_message'))
-            <div class="alert alert-success">
-                {{ Session::get('success_message') }}
-            </div>
-        @endif
-        @if(Session::has('error_message'))
-            <div class="alert alert-danger">
-                {{ Session::get('error_message') }}
-            </div>
-        @endif
+        <div class="clearfix"></div>
+            @if(Session::has('success_message'))
+                <div class="alert alert-success alert-block">
+                    <button type="button" class="close" data-dismiss="alert"> x </button>
+                    {{ Session::get('success_message') }}
+                </div>
+            @endif
+            @if(Session::has('error_message'))
+                <div class="alert alert-danger alert-block">
+                    <button type="button" class="close" data-dismiss="alert"> x </button>
+                    {{ Session::get('error_message') }}
+                </div>
+            @endif
         <div class="resp"></div>
         <br>
         <div class="row">
@@ -94,7 +97,7 @@
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label for="product_id">Choose Product</label>
-                                <select class="form-control js-example-basic-single" id="product_id" name="product_id" data-placeholder="--Search Product--" required>
+                                <select class="form-control js-example-basic-single" id="product_id" name="product_id" data-placeholder="-- Search Product --" required>
                                 </select>
                                 <span class="error"><b>
                                        @if($errors->has('product_id'))
@@ -111,7 +114,7 @@
                                          @endif</b></span>
                             </div>
                             <div class="form-group">
-                                <label for="price">Price per/pices*</label>
+                                <label for="price">Price per/Measure*</label>
                                 <input type="number" class="form-control" name="price" id="price" placeholder="price" required>
                                 <span class="error"><b>
                                          @if($errors->has('price'))
@@ -119,7 +122,7 @@
                                          @endif</b></span>
                             </div>
                               <div class="form-group">
-                                <label for="tax">Tax*</label>
+                                <label for="tax">Tax *</label>
                                 <input type="text" class="form-control" name="tax" id="tax" placeholder="tax" >
                                 <span class="error"><b>
                                          @if($errors->has('tax'))
@@ -136,7 +139,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Sales Status:- &nbsp;</label>
+                                <label>Sales Status : &nbsp;</label>
                                 <input type="radio" name="sales_status" value="1" id="Active" checked=""><label for="Active"> Cash Sales </label>
                                 <input type="radio" name="sales_status" id="deactive" value="0"><label for="deactive"> Credit Sales </label>
                             </div>
@@ -340,7 +343,7 @@
                 type: 'get',
                 dataType: 'html',
                 success:function(data) {
-                    var mywindow = window.open('', 'Sabaiko Live Bakery', 'height=400,width=600');
+                    var mywindow = window.open('', 'R2K Billing System', 'height=400,width=600');
                     mywindow.document.write('<html><head><title></title>');
                     mywindow.document.write('</head><body>');
                     mywindow.document.write(data);

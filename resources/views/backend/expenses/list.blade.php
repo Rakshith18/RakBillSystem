@@ -24,21 +24,24 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="input-group">
-                                    <a href="{{route('expenses.create')}}" class="btn btn-success">New expenses</a>
+                                    <a href="{{route('expenses.create')}}" class="btn btn-success">New Expenses</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            
             <div class="clearfix"></div>
             @if(Session::has('success_message'))
-                <div class="alert alert-success">
+                <div class="alert alert-success alert-block">
+                    <button type="button" class="close" data-dismiss="alert"> x </button>
                     {{ Session::get('success_message') }}
                 </div>
             @endif
             @if(Session::has('error_message'))
-                <div class="alert alert-danger">
+                <div class="alert alert-danger alert-block">
+                    <button type="button" class="close" data-dismiss="alert"> x </button>
                     {{ Session::get('error_message') }}
                 </div>
             @endif
@@ -68,7 +71,7 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="categorytable">
                                 <thead>
                                 <tr>
-                                    <th>S.N.</th>
+                                    <th>Sl.No.</th>
                                     <th>Expenses Name</th>
                                     <th>Party Name</th>
                                     <th>Total Amount</th>

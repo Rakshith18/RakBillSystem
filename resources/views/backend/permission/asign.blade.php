@@ -24,14 +24,16 @@
                 </div>
             </div>
 
-            <div class="clearfix"></div>
+           <div class="clearfix"></div>
             @if(Session::has('success_message'))
-                <div class="alert alert-success">
+                <div class="alert alert-success alert-block">
+                    <button type="button" class="close" data-dismiss="alert"> x </button>
                     {{ Session::get('success_message') }}
                 </div>
             @endif
             @if(Session::has('error_message'))
-                <div class="alert alert-danger">
+                <div class="alert alert-danger alert-block">
+                    <button type="button" class="close" data-dismiss="alert"> x </button>
                     {{ Session::get('error_message') }}
                 </div>
             @endif
@@ -39,7 +41,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Asign Permission For <b>{{$roledetails->name}}</b></h2>
+                            <h2>Assign Permission For <b>{{$roledetails->name}}</b></h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
@@ -76,7 +78,7 @@
                                     @endforeach
                                 <br><br>
                                 <div class="box-footer">
-                                    <button type="submit" name="btnCreate" class="btn btn-primary">asign Permission</button>
+                                    <button type="submit" name="btnCreate" class="btn btn-primary">Assign Permission</button>
                                 </div>
                             </form>
                         </div>

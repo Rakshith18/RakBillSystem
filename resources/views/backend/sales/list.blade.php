@@ -24,14 +24,17 @@
                 </div>
 
             </div>
+       
             <div class="clearfix"></div>
             @if(Session::has('success_message'))
-                <div class="alert alert-success">
+                <div class="alert alert-success alert-block">
+                    <button type="button" class="close" data-dismiss="alert"> x </button>
                     {{ Session::get('success_message') }}
                 </div>
             @endif
             @if(Session::has('error_message'))
-                <div class="alert alert-danger">
+                <div class="alert alert-danger alert-block">
+                    <button type="button" class="close" data-dismiss="alert"> x </button>
                     {{ Session::get('error_message') }}
                 </div>
             @endif
@@ -39,7 +42,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Listing sales Deails</h2>
+                            <h2>Listing Sales Details</h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
@@ -61,12 +64,12 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="categorytable">
                                 <thead>
                                 <tr>
-                                    <th>S.N.</th>
+                                    <th>Sl.No.</th>
                                     <th>Product Name</th>
                                     <th>Quantity</th>
                                     <th>Total Price</th>
                                     <th>sales Date</th>
-                                    <th>Sales status</th>
+                                    <th>Sales Status</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -80,9 +83,9 @@
                                         <td> {{$pc->sales_date}}</td>
                                         <td>
                                             @if($pc->sales_status == 1)
-                                                <span class="label label-success"> cash </span>
+                                                <span class="label label-success"> Cash </span>
                                             @else
-                                                <span class="label label-danger"> cerdit </span>
+                                                <span class="label label-danger"> Credit </span>
                                             @endif
                                         </td>
                                     </tr>
@@ -145,6 +148,7 @@
     </div>
     <!-- /page content -->
 @endsection
+
 @section('script')
     <script type="text/javascript" src="{{asset('backend/plugins/jquery.dataTables.min.js')}}"></script>
     <script type="text/javascript">

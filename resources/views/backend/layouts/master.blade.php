@@ -29,7 +29,7 @@
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
                 <div class="navbar nav_title" style="border: 0;">
-                    <a href="{{route('user.dashboard')}}" class="site_title"><i class="fa fa-user"></i> <span> R2K Grocery System</span></a>
+                    <a href="{{route('user.dashboard')}}" class="site_title"><i class="fa fa-user"></i> <span> R2K Billing System</span></a>
                 </div>
                 <div class="clearfix"></div>
                 <!-- menu profile quick info -->

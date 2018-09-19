@@ -11,7 +11,7 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>Transaction/Bank Management</h3>
+                    <h3>Transaction / Bank Management</h3>
                 </div>
                 <div class="title_right">
                     <div class="col-md-12 col-sm-12 col-xs-12 form-group top_search">
@@ -28,14 +28,17 @@
                     </div>
                 </div>
             </div>
-            <div class="clearfix"></div>
+            
+             <div class="clearfix"></div>
             @if(Session::has('success_message'))
-                <div class="alert alert-success">
+                <div class="alert alert-success alert-block">
+                    <button type="button" class="close" data-dismiss="alert"> x </button>
                     {{ Session::get('success_message') }}
                 </div>
             @endif
             @if(Session::has('error_message'))
-                <div class="alert alert-danger">
+                <div class="alert alert-danger alert-block">
+                    <button type="button" class="close" data-dismiss="alert"> x </button>
                     {{ Session::get('error_message') }}
                 </div>
             @endif
@@ -66,7 +69,7 @@
                             <form action="{{route('transaction.store')}}" method="post">
                                 {{ csrf_field()}}
                                 <div class="form-group">
-                                    <label for="totalamount">Total Amount(To Be Deposited)*</label>
+                                    <label for="totalamount">Total Amount (To Be Deposited) *</label>
                                     <input type="number" class="form-control" id="totalamount" name="totalamount" placeholder="Enter Total Amount To Be Deposite">
                                      @if($errors->has('totalamount'))
                                         <span class="error"><b>
@@ -75,7 +78,7 @@
                                      @endif
                                 </div>
                                 <div class="form-group">
-                                    <label for="depositeamount">Deposited Amount*</label>
+                                    <label for="depositeamount">Deposited Amount *</label>
                                     <input type="number" class="form-control" id="depositeamount" name="depositeamount" placeholder="Enter Deposited Amount">
                                     @if($errors->has('depositeamount'))
                                         <span class="error"><b>
@@ -84,7 +87,7 @@
                                     @endif
                                 </div>
                                 <div class="form-group">
-                                <label for="deposite_by">Deposite By*</label>
+                                <label for="deposite_by">Deposited By *</label>
                                     <input type="text" class="form-control" name="deposite_by" id="deposite_by" placeholder="Enter Depositor  Full Name">
                                     @if($errors->has('deposite_by'))
                                         <span class="error"><b>
@@ -93,7 +96,7 @@
                                     @endif
                                 </div>
                                 <div class="form-group">
-                                    <label for="deposite_date">Deposite Date*</label>
+                                    <label for="deposite_date">Deposited Date *</label>
                                     <input type="text" class="form-control" data-toggle="start" name="deposite_date" id="deposite_date" placeholder="Pick Deposite Date">
                                     @if($errors->has('deposite_date'))
                                         <span class="error"><b>
@@ -102,7 +105,7 @@
                                     @endif
                                 </div>
                                 <div class="form-group">
-                                    <label for="bank_name">Bank Name*</label>
+                                    <label for="bank_name">Bank Name *</label>
                                     <input type="text" class="form-control"  name="bank_name" id="bank_name" placeholder="Enter Bank Name where you Deposite">
                                     @if($errors->has('bank_name'))
                                         <span class="error"><b>
@@ -123,6 +126,7 @@
     </div>
     <!-- /page content -->
 @endsection
+
 @section('script')
     <script src="{{asset('backend/plugins/datepicker/datepicker.js')}}"></script>
     <script type="text/javascript">

@@ -14,24 +14,34 @@
                     <h3>Stock Management </h3>
                 </div>
                 <div class="title_right">
-                    <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                        <div class="col-md-5 col-sm-5 col-xs-12 form-group top_search" style="padding-left: 75px;">
+                    <div class="col-md-8 col-sm-8 col-xs-12 form-group pull-right top_search">
+                        <div class="col-md-4 col-sm-4 col-xs-12 form-group top_search" style="padding-left: 100px;">
                             <div class="input-group">
-                                <a href="{{route('product.list')}}" class="btn btn-success">View Product</a>
+                                 <form action="{{route('stock.clear',$product->id)}}" method="post">
+                                    {{ csrf_field()}}
+                                    <button type="submit" name="btnClear" class="btn btn-danger" ><i class="fa fa-bolt"></i> Clear Stock</button>
+                                 </form>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12 form-group top_search" style="padding-left: 100px;">
+                            <div class="input-group">
+                                <a href="{{route('product.list')}}" class="btn btn-success"><i class="fa fa-eye"></i> View Product</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="clearfix"></div>
+           <div class="clearfix"></div>
             @if(Session::has('success_message'))
-                <div class="alert alert-success">
+                <div class="alert alert-success alert-block">
+                    <button type="button" class="close" data-dismiss="alert"> x </button>
                     {{ Session::get('success_message') }}
                 </div>
             @endif
             @if(Session::has('error_message'))
-                <div class="alert alert-danger">
+                <div class="alert alert-danger alert-block">
+                    <button type="button" class="close" data-dismiss="alert"> x </button>
                     {{ Session::get('error_message') }}
                 </div>
             @endif
@@ -61,13 +71,17 @@
                         <div class="x_content">
                             <form action="{{route('stock.update',$product->id)}}" method="post">
                                 {{ csrf_field()}}
-                                <div class="form-group">
-                                    <label for="stock">Already Available*</label>
-                                    <input type="number" value="{{$product->stock}}" class="form-control"  placeholder="Enter Available Stock" disabled>
+                                 <div class="form-group">
+                                    <label for="stock">Product Name</label>
+                                    <input type="text" value="{{$product->name}}" class="form-control"  placeholder="" disabled>
                                 </div>
                                 <div class="form-group">
-                                    <label for="stock">Stock You Want To Add*</label>
-                                    <input type="number"  class="form-control" id="stock" name="stock" placeholder="Enter Stock You Want to Add" min="1">
+                                    <label for="stock">Stock Already Available *</label>
+                                    <input type="number" value="{{$product->stock}}" class="form-control"  placeholder="" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="stock">Stock To be Added *</label>
+                                    <input type="number"  class="form-control" id="stock" name="stock" placeholder="Enter Stock to be Updated" min="1">
                                     <span class="error"><b>
                                          @if($errors->has('stock'))
                                                 {{$errors->first('stock')}}
@@ -76,6 +90,7 @@
                                 <!-- /.box-body -->
                                 <div class="box-footer">
                                     <button type="submit" name="btnCreate" class="btn btn-primary" >Update Stock</button>
+
                                 </div>
                             </form>
                         </div>

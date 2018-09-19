@@ -10,7 +10,7 @@
 <table border="1" align="center" cellpadding="5">
     <thead>
     <tr>
-        <th>S.N.</th>
+        <th>Sl.No.</th>
         <th>Goods Name</th>
         <th>Party Name</th>
         <th>Total Amount</th>

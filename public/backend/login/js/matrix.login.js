@@ -1,7 +1,7 @@
 
 $(document).ready(function(){
 
-	var login = $('#loginform'); 
+	var login = $('#loginform');
 	var recover = $('#recoverform');
 	var speed = 400;
 

@@ -26,12 +26,14 @@
 
             <div class="clearfix"></div>
             @if(Session::has('success_message'))
-                <div class="alert alert-success">
+                <div class="alert alert-success alert-block">
+                    <button type="button" class="close" data-dismiss="alert"> x </button>
                     {{ Session::get('success_message') }}
                 </div>
             @endif
             @if(Session::has('error_message'))
-                <div class="alert alert-danger">
+                <div class="alert alert-danger alert-block">
+                    <button type="button" class="close" data-dismiss="alert"> x </button>
                     {{ Session::get('error_message') }}
                 </div>
             @endif
@@ -62,17 +64,17 @@
                             <form action="{{route('productcategory.update',$productcategory->id)}}" method="post">
                                 {{ csrf_field()}}
                                 <div class="form-group">
-                                    <label for="name">Name*</label>
+                                    <label for="name">Name *</label>
                                     <input type="text" class="form-control" id="name" value="{{$productcategory->name}}" name="name"
                                            placeholder="Enter name">
                                     <span class="error"><b>
-                            @if($errors->has('name'))
-                                                {{$errors->first('name')}}
-                                            @endif</b>
+                                     @if($errors->has('name'))
+                                         {{$errors->first('name')}}
+                                    @endif</b>
                         </span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="slug">Slug*</label>
+                                    <label for="slug">Slug *</label>
                                     <input type="text" class="form-control" value="{{$productcategory->slug}}" id="slug" name="slug"
                                            placeholder="Enter slug">
                                     <span class="error"><b>

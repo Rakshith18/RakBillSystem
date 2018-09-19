@@ -40,14 +40,17 @@
                     {{--</div>--}}
                 {{--</div>--}}
             </div>
+           
             <div class="clearfix"></div>
             @if(Session::has('success_message'))
-                <div class="alert alert-success">
+                <div class="alert alert-success alert-block">
+                    <button type="button" class="close" data-dismiss="alert"> x </button>
                     {{ Session::get('success_message') }}
                 </div>
             @endif
             @if(Session::has('error_message'))
-                <div class="alert alert-danger">
+                <div class="alert alert-danger alert-block">
+                    <button type="button" class="close" data-dismiss="alert"> x </button>
                     {{ Session::get('error_message') }}
                 </div>
             @endif
@@ -55,7 +58,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2> Remaining To Deposite Deails</h2>
+                            <h2> Pending Deposite Deails</h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
@@ -77,10 +80,10 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="categorytable">
                                 <thead>
                                 <tr>
-                                    <th>S.N.</th>
+                                    <th>Sl.No.</th>
                                     <th>Total Amount</th>
                                     <th>deposite Amount</th>
-                                    <th>Remaining To Deposite</th>
+                                    <th>Pending Deposite</th>
                                     <th>Deposited By</th>
                                     <th>Deposited Date</th>
                                     <th>Bank Name</th>
@@ -148,16 +151,16 @@
                             </table>
                         </div>
                         <br>
-                        <h2>Deposited details</h2>
+                        <h2>Deposited Details</h2>
                         <hr>
                         <div class="x_content">
                             <table width="100%" class="table table-striped table-bordered table-hover" id="categorytable">
                                 <thead>
                                 <tr>
-                                    <th>S.N.</th>
+                                    <th>Sl.No.</th>
                                     <th>Total Amount</th>
                                     <th>deposite Amount</th>
-                                    <th>Remaining To Deposite</th>
+                                    <th>Pending Deposite</th>
                                     <th>Deposited By</th>
                                     <th>Deposited Date</th>
                                     <th>Bank Name</th>

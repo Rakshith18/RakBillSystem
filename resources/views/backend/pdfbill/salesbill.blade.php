@@ -10,13 +10,13 @@
 </head><body>
 <p align="center"><strong>R2k Grocery System (RGS)</strong></p>
 <p align="center">MG Road, Mangaluru - 575001</p>
-<p align="center">Phone No: +91 </p>
+<p align="center">Phone No: +91  </p>
 <p align="center">PAN No: 603655986</p>
 <hr>
 
-<p>Date: <?php
+<p>Date : <?php
 date_default_timezone_set('Asia/Kolkata');
-echo date("d-m-Y h:i:s");?></p> <p style="align:right;">Bill No:</p>
+echo date("d-m-Y h:i:s");?></p> <p style="align:right;">Bill No :</p>
 
 <hr>
 <table border="0" align="center">
@@ -59,7 +59,7 @@ echo date("d-m-Y h:i:s");?></p> <p style="align:right;">Bill No:</p>
 <br>
 
 <hr>
-<p align="center">Thank You. Visit Again</p>
+<p align="center">Thank You... Visit Again...</p>
 
 </body></html>
 

@@ -64,9 +64,9 @@ class ModuleController extends Controller
                 $rolemodule->role_id = $role;
                 $rolemodule->save();
             }
-            return redirect()->route('module.list')->with('success_message', 'You are successfully created');
+            return redirect()->route('module.list')->with('success_message', 'You are Successfully Created');
         } else {
-            return redirect()->route('module.create')->with('error_message', 'You con not create rignt now');
+            return redirect()->route('module.create')->with('error_message', 'You cannot Create Rignt Now');
         }
     }
     /**

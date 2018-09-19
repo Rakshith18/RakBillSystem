@@ -10,12 +10,12 @@
 <table border="0" align="center" cellpadding="5">
     <thead>
     <tr>
-        <th>S.N.</th>
+        <th>Sl.No.</th>
         <th>Product Name</th>
         <th>Quantity</th>
         <th>Price</th>
-        <th>sales By</th>
-        <th>sales Date</th>
+        <th>Sales By</th>
+        <th>Sales Date</th>
     </tr>
     </thead>
     <tbody>

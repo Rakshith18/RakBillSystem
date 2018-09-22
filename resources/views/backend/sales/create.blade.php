@@ -27,7 +27,7 @@
             
             <div class="clearfix"></div>
             @if(Session::has('success_message'))
-                <div class="alert alert-success alert-block">
+                <div class="alert alert-info alert-block">
                     <button type="button" class="close" data-dismiss="alert"> x </button>
                     {{ Session::get('success_message') }}
                 </div>
@@ -85,7 +85,7 @@
                                          @endif</b></span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="price">Price per/Measure *</label>
+                                    <label for="price">Price per/Measure</label>
                                     <input type="number" class="form-control" name="price" id="price" placeholder="price" required>
                                     <span class="error"><b>
                                          @if($errors->has('price'))
@@ -217,6 +217,7 @@
                     'X-CRF-TOKEN': $('meat[name = "csrf-token"]').attr('content')
                 }
             });
+            
             $('#btnSave').on('submit', function (e) {
                 e.preventDefault();
                 var url = $(this).attr('action');
@@ -230,7 +231,7 @@
                         refreshproduct();
                         readsales();
                         ajaxform();
-                        var m = "<div class='alert alert-success'>" + data.success_message + "</div>";
+                        var m = "<div class='alert alert-info alert-block'> <button type='button' class='close' data-dismiss='alert'> x </button>" + data.success_message + "</div>";
                        // alert(data.success_message);
                         $('.resp').html(m);
                         document.getElementById("btnSave").reset();

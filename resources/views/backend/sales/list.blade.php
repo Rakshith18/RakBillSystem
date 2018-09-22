@@ -116,10 +116,10 @@
                             <form action="{{route('custom.view')}}" method="post">
                                 {{csrf_field()}}
                                 <div class="col-md-3">
-                                    <input class="form-control" data-toggle="start" type="text" name="start" placeholder="pick Start Date">
+                                    <input class="form-control" data-toggle="start" type="text" name="start" placeholder="pick Start Date" required="">
                                 </div>
                                 <div class="col-md-3">
-                                    <input class="form-control" data-toggle="end" type="text" name="end" placeholder="pick End Date">
+                                    <input class="form-control" data-toggle="end" type="text" name="end" placeholder="pick End Date" required="">
                                 </div>
                                  <div class="col-md-3">
                                     <button name="" class="btn btn-info" formtarget="_blank">View Report</button>
@@ -130,10 +130,10 @@
                             <form action="{{route('custom.report')}}" method="post">
                                 {{csrf_field()}}
                                 <div class="col-md-3">
-                                    <input class="form-control" data-toggle="start" type="text" name="start" placeholder="pick Start Date">
+                                    <input class="form-control" data-toggle="start" type="text" name="start" placeholder="pick Start Date" required="">
                                 </div>
                                 <div class="col-md-3">
-                                    <input class="form-control" data-toggle="end" type="text" name="end" placeholder="pick End Date">
+                                    <input class="form-control" data-toggle="end" type="text" name="end" placeholder="pick End Date" required="">
                                 </div>
                                  \
                                 <div class="col-md-3">

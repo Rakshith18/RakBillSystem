@@ -25,12 +25,14 @@
             </div>
             <div class="clearfix"></div>
             @if(Session::has('success_message'))
-                <div class="alert alert-success">
+                <div class="alert alert-success alert-block">
+                    <button type="button" class="close" data-dismiss="alert"> x </button>
                     {{ Session::get('success_message') }}
                 </div>
             @endif
             @if(Session::has('error_message'))
-                <div class="alert alert-danger">
+                <div class="alert alert-danger alert-block">
+                    <button type="button" class="close" data-dismiss="alert"> x </button>
                     {{ Session::get('error_message') }}
                 </div>
             @endif
@@ -62,8 +64,8 @@
                                 <tr>
                                     <th>Sl.No.</th>
                                     <th>Module Name</th>
-                                    <th>Module Key</th>
                                     <th>Module URL</th>
+                                    <th>Module Rank</th>
                                     <th>Sidebar</th>
                                     <th>created_date</th>
                                     <th>updated_date</th>
@@ -76,8 +78,8 @@
                                     <tr>
                                         <th> {{$i++}}</th>
                                         <td> {{$m->name}}</td>
-                                        <td> {{$m->module_key}}</td>
                                         <td> {{$m->module_url}}</td>
+                                        <td> {{$m->module_rank}}</td>
                                         <td>
                                             @if($m->view_sidebar == 1)
                                                 <span class="label label-success"> Yes </span>

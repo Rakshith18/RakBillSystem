@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 
-
+<!-- <link href="{{asset('backend/vendors/bootstrap-4.1.3/dist/css/bootstrap.min.css')}}" rel="stylesheet"> -->
 </head><body>
 <p align="center"><strong>R2k Grocery System (RGS)</strong></p>
 <p align="center">MG Road, Mangaluru - 575001</p>
@@ -25,6 +25,7 @@ echo date("d-m-Y h:i:s");?></p> <p style="align:right;">Bill No :</p>
         <th>Sl.No.</th>
         <th>Product Name</th>
         <th>Quantity</th>
+        <th>Tax %</th>
         <th>Price</th>
     </tr>
     </thead><tr></tr>
@@ -35,12 +36,13 @@ echo date("d-m-Y h:i:s");?></p> <p style="align:right;">Bill No :</p>
         <td>{{$i++}}</td>
         <td>{{$all->name}}</td>
         <td>{{$all->quantity}}</td>
+        <td>{{$all->tax}}</td>
         <td>{{$all->price}}</td>
     </tr>
     @endforeach
     
         <tr><td></td>
-        <td colspan="2"> Grand Total </td>
+        <td colspan="3"><strong> Grand Total </strong> </td>
         <td>
             <?php $total=0 ?>
             @if($report)

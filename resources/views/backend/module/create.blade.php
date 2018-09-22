@@ -26,13 +26,15 @@
 
             <div class="clearfix"></div>
             @if(Session::has('success_message'))
-                <div class="alert alert-success">
+                <<div class="alert alert-success alert-block">
+                    <button type="button" class="close" data-dismiss="alert"> x </button>
                     {{ Session::get('success_message') }}
                 </div>
             @endif
             @if(Session::has('error_message'))
-                <div class="alert alert-danger">
-                    {{ Session::get('error_message') }}
+               <div class="alert alert-danger alert-block">
+                    <button type="button" class="close" data-dismiss="alert"> x </button>
+                    {{ Session::get('success_message') }}
                 </div>
             @endif
             <div class="row">
@@ -127,5 +129,17 @@
 @endsection
 
 @section('script')
-
+    <script src="{{asset('backend/plugins/ckeditor/ckeditor.js')}}"></script>
+    <script type="text/javascript">
+        $(function(){
+            var $foo = $('#name');
+            var $bar = $('#slug');
+            function onChange() {
+                $bar.val($foo.val().replace(/\s+/g, '-').toLowerCase());
+            };
+            $('#name')
+                .change(onChange)
+                .keyup(onChange);
+        });
+    </script>
 @endsection

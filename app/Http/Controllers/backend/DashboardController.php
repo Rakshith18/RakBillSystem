@@ -25,6 +25,7 @@ class DashboardController extends Controller
         //$birthday = Sale::whereMonth('sales_date', '=', date('m'))->whereDay('sales_date', '=', date('d')+1)->get();
 
         $sales = Sale::all();
+
         $totalrevenue = 0;
         if ($sales) {
             foreach ($sales as $w) {
@@ -32,12 +33,36 @@ class DashboardController extends Controller
                 $totalrevenue += $with;
             }
         }
+
+        $todayrevenue = 0;
+        if($sales) {
+            foreach ($sales as $x) {
+                if($x->sales_date == date('Y-m-d')) {
+                    $with = $x->price;
+                    $todayrevenue += $with;
+                }
+                
+            }
+        }
+
+        $creditsale = 0;
+        if($sales) {
+            foreach ($sales as $y) {
+                if($y->sales_status == 0) {
+                    $with = $y->price;
+                    $creditsale += $with;
+                }
+                
+            }
+        }
+
+
         $ccategory = Productcategory::all();
         $cproduct = Product::all();
         $totalcategory = count($ccategory);
         $totalproduct = count($cproduct);
         $salescart = Salescart::all();
-        return view('backend.dashboard.index', compact('totalrevenue', 'totalcategory', 'totalproduct', 'salescart'));
+        return view('backend.dashboard.index', compact('creditsale','todayrevenue', 'totalcategory', 'totalproduct', 'salescart'));
     }
 
     /**
@@ -45,6 +70,10 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public  function calendar()
+    {
+        return view('backend.dashboard.calendar');
+    }
 
     public function create()
     {

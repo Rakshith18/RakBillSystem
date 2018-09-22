@@ -4,6 +4,7 @@ namespace App\Http\Controllers\backend;
 
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Module;
 use App\Models\RoleModule;
@@ -88,9 +89,10 @@ class ModuleController extends Controller
     public function edit($id)
     {
 
-//        $module = Module::find($id);
-//        $role = Role::all();
-//        return view('backend.module.edit',compact('module','role'));
+        $this->checkpermission('module-edit');
+        $role = Role::all();
+        $module = Module::find($id);
+        return view('backend.module.edit', compact('module','role'));
     }
     /**
      * Update the specified resource in storage.
@@ -101,7 +103,24 @@ class ModuleController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+         $this->validate($request, [
+            'name' => 'required',
+            'module_url' => 'required',
+            'module_rank' => 'required',
+        ]);
+        $pc = Module::find($id);
+        $pc->name = $request->name;
+        $pc->module_url = $request->module_url;
+        $pc->view_sidebar = $request->view_sidebar;
+        $pc->module_icon = $request->module_icon;
+        $pc->module_rank = $request->module_rank;
+        $pc->updated_at = date('Y-m-d H:i:s');
+        $message = $pc->update();
+        if ($message) {
+            return redirect()->route('module.list')->with('success_message', 'Successfully Updated');
+        } else {
+            return redirect()->route('module.update')->with('error_message', 'Failed to Update');
+        }
     }
 
     /**

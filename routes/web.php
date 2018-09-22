@@ -20,6 +20,8 @@ Route::group(['middleware' => 'Revalidate'],function() {
 
         Route::get('/dashboard-panel', ['as' => 'user.dashboard', 'uses' => 'backend\DashboardController@index']);
 
+        Route::get('/calendar-events', ['as' => 'user.calendar', 'uses' => 'backend\DashboardController@calendar']);
+
         Route::get('/user-register', ['as' => 'user.register', 'uses' => 'backend\UserController@create']);
         Route::post('/user-save', ['as' => 'user.store', 'uses' => 'backend\UserController@store']);
         Route::get('/change-password', ['as' => 'change.password', 'uses' => 'backend\UserController@changepassword']);

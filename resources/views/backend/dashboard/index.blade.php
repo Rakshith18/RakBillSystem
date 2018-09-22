@@ -2,6 +2,7 @@
 @section('title')
    R2K Dashboard Page
 @endsection
+
 @section('css')
     <link rel="stylesheet" href="{{asset('backend/plugins/select2.min.css')}}">
     <!-- NProgress -->
@@ -15,7 +16,7 @@
     <link href="{{asset('backend/vendors/jqvmap/dist/jqvmap.min.css')}}" rel="stylesheet"/>
     <!-- bootstrap-daterangepicker -->
     <link href="{{asset('backend/vendors/bootstrap-daterangepicker/daterangepicker.css')}}" rel="stylesheet">
-     <link href="{{asset('backend/vendors/bootstrap-4.1.3/dist/css/bootstrap.min.css')}}" rel="stylesheet">
+    <!-- <link href="{{asset('backend/vendors/bootstrap-4.1.3/dist/css/bootstrap.min.css')}}" rel="stylesheet"> -->
     <link href="{{asset('backend/vendors/fullcalendar/dist/fullcalendar.min.css')}}" rel="stylesheet">
     <link href="{{asset('backend/login/css/style.css')}}" rel="stylesheet">
 @endsection
@@ -28,17 +29,17 @@
                 <div class="info-box blue-bg bg-red" style="text-align: center;border-radius: 5px;">
                     <i class="fa fa-money"></i>
                     <div class="count">
-                        Rs. 0
+                        Rs. {{$creditsale}}
                     </div>
-                    <div class="title">Current Balance</div>
+                    <div class="title">Current Credit Balance</div>
                 </div><!--/.info-box-->
             </div><!--/.col-->
 
             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                 <div class="info-box brown-bg bg-primary" style="text-align: center;border-radius: 5px;">
                     <i class="fa fa-shopping-cart"></i>
-                    <div class="count">{{$totalrevenue}}</div>
-                    <div class="title">Total Sales Revenue</div>
+                    <div class="count">Rs. {{$todayrevenue}}</div>
+                    <div class="title">Today's Sales Revenue</div>
                 </div><!--/.info-box-->
             </div><!--/.col-->
 
@@ -53,7 +54,7 @@
                 <div class="info-box dark-bg bg-primary" style="text-align: center;border-radius: 5px;">
                     <i class="fa fa-product-hunt"></i>
                     <div class="count">{{$totalproduct}}</div>
-                    <div class="title">Total No. of Product</div>
+                    <div class="title">Total No. of Products</div>
                 </div><!--/.info-box-->
             </div><!--/.col-->
         </div>
@@ -96,16 +97,16 @@
                     <div class="x_content">
                         <form id="btnSave" action="{{route('sales.store')}}" method="post">
                             {{ csrf_field() }}
-                            <div class="form-group">
-                                <label for="product_id">Choose Product</label>
-                                <select class="form-control js-example-basic-single" id="product_id" name="product_id" data-placeholder="-- Search Product --" required>
-                                </select>
-                                <span class="error"><b>
+                           <div class="form-group">
+                                    <label for="product_id">Choose Product</label>
+                                    <select class="form-control js-example-basic-single" id="product_id" name="product_id" data-placeholder="--Search Product--" required>
+                                    </select>
+                                    <span class="error"><b>
                                        @if($errors->has('product_id'))
-                                            {{$errors->first('product_id')}}
+                                              {{$errors->first('product_id')}}
                                        @endif</b>
                                     </span>
-                            </div>
+                                </div>
                             <div class="form-group">
                                 <label for="quantity">Stock Available</label>
                                 <input type="number" class="form-control" id="stock" name="stock" placeholder="Stock Available" disabled>
@@ -115,7 +116,7 @@
                                          @endif</b></span>
                             </div>
                             <div class="form-group">
-                                <label for="price">Price per/Measure*</label>
+                                <label for="price">Price per/Measure</label>
                                 <input type="number" class="form-control" name="price" id="price" placeholder="price" required>
                                 <span class="error"><b>
                                          @if($errors->has('price'))
@@ -123,7 +124,7 @@
                                          @endif</b></span>
                             </div>
                               <div class="form-group">
-                                <label for="tax">Tax *</label>
+                                <label for="tax">Tax </label>
                                 <input type="text" class="form-control" name="tax" id="tax" placeholder="tax" >
                                 <span class="error"><b>
                                          @if($errors->has('tax'))
@@ -186,7 +187,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+       <!--  <div class="row">
             <div class="col-md-12">
                 <div class="x_panel">
                     <div class="x_title">
@@ -211,7 +212,7 @@
                         <div id='calendar'></div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
         <br/>
     </div>
@@ -295,7 +296,7 @@
                         refreshproduct();
                         readsales();
                         ajaxform();
-                        var m = "<div class='alert alert-success'>" + data.success_message + "</div>";
+                        var m = "<div class='alert alert-info alert-block'> <button type='button' class='close' data-dismiss='alert'> x </button>" + data.success_message + "</div>";
                         // alert(data.success_message);
                         $('.resp').html(m);
                         document.getElementById("btnSave").reset();

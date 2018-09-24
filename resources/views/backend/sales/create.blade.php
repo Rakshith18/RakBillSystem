@@ -1,6 +1,6 @@
 @extends('backend.layouts.master')
 @section('title')
-    Make Sales Page
+    Make Sales Page   
 @endsection
 @section('css')
     <link rel="stylesheet" href="{{asset('backend/plugins/select2.min.css')}}">

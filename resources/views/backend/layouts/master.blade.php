@@ -1,4 +1,5 @@
 <!doctype html>
+
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -28,6 +29,7 @@
     </style>
     @Yield('css')
 </head>
+
 <body class="nav-md">
 <div class="container body">
     <div class="main_container">

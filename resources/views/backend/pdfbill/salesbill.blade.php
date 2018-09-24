@@ -1,5 +1,7 @@
-<!doctype html>
-<html><head>
+<!doctype html>    
+
+<html>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -7,7 +9,8 @@
     <title>Document</title>
 
 <!-- <link href="{{asset('backend/vendors/bootstrap-4.1.3/dist/css/bootstrap.min.css')}}" rel="stylesheet"> -->
-</head><body>
+</head>
+<body>
 <p align="center"><strong>R2k Grocery System (RGS)</strong></p>
 <p align="center">MG Road, Mangaluru - 575001</p>
 <p align="center">Phone No: +91  </p>

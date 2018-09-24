@@ -392,8 +392,8 @@
 
                 });
                 
-                $("#customer_name").attr('disabled','disabled').val('');
-                $("#customer_address").attr('disabled','disabled').val('');
+                $("#customer_name").attr('readonly','true');
+                $("#customer_address").attr('readonly','true');
 
             });
         });

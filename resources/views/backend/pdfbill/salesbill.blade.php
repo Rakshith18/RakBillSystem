@@ -17,11 +17,14 @@
 <p align="center">PAN No: 603655986</p>
 <hr>
 
-<p>Date : <?php
-date_default_timezone_set('Asia/Kolkata');
-echo date("d-m-Y h:i:s");?></p> <p style="align:right;">Bill No :</p>
+    <p>Customer Name : {{$report[0]->customer_name}}&nbsp;{{$report[0]->customer_address}}</p>
 
+    <p>Date : <?php
+        date_default_timezone_set('Asia/Kolkata');
+        echo date("d-m-Y h:i:s");?></p> 
+    <p style="align:right;">Bill No :</p>
 <hr>
+
 <table border="0" align="center">
     <thead>
     <tr>
@@ -33,9 +36,10 @@ echo date("d-m-Y h:i:s");?></p> <p style="align:right;">Bill No :</p>
     </tr>
     </thead><tr></tr>
     <tbody>
-    <?php $i=1 ?>
-    @foreach($report as $all)
     <tr>
+         <?php $i=1 ?>
+        @foreach($report as $all)
+
         <td>{{$i++}}</td>
         <td>{{$all->name}}</td>
         <td>{{$all->quantity}}</td>

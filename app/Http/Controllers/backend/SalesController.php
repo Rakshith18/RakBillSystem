@@ -29,10 +29,12 @@ class SalesController extends Controller
             'price' => 'required',
             'tax'=>'required',
             'sales_quantity' => 'required',
+            'customer_name' => 'required',
+            'customer_address' => 'required',
         ]);
         if ($request->ajax()) {
             $sales = new Salescart();
-            $sales->product_id = $request->product_id;
+            $sales->product_id = $request->product_id;  
             $sales->quantity = $request->sales_quantity;
             // if($sales->quantity<)
             $total=$request->price * $request->sales_quantity;
@@ -41,7 +43,9 @@ class SalesController extends Controller
             $sales->price = $total+$taxAmt;
             $sales->tax=$request->tax;
             $sales->sales_status = $request->sales_status;
-            $sales->saller_name = Auth::user()->username;
+            $sales->customer_name=$request->customer_name;
+            $sales->customer_address=$request->customer_address;
+            $sales->seller_name = Auth::user()->username;
             $sales->sales_date = date('Y-m-d');
             if ($sales->save()) {
                 $product = Product::find($request->product_id);
@@ -73,6 +77,11 @@ class SalesController extends Controller
             ->orderBy('salescarts.created_at', 'DEC')
             ->get();
         return view('backend.sales.ajaxlist', compact('sales'));
+    }
+    public function ajaxreadname()
+    {
+      $salescart = Salescart::where($request->customer_name)->get();
+        echo $salescart[0]->customer_name;
     }
 
     public function ajaxform()
@@ -156,10 +165,13 @@ class SalesController extends Controller
                 'quantity' => $request['quantity'][$i],
                 'price' => $request['price'][$i],
                 'tax' => $request['tax'][$i],
+                'customer_name' => $request['customer_name'][$i],
+                'customer_address' => $request['customer_address'][$i],
                 'sales_status' => $request['sales_status'][$i],
-                'saller_name' => Auth::user()->username,
+                'seller_name' => Auth::user()->username,
                 'sales_date' => date('Y-m-d'),
             ];
+            // dd($od);
             Sale::create($od);
         }
         DB::table('salescarts')->delete();
@@ -204,5 +216,14 @@ class SalesController extends Controller
         }else {
             return redirect()->back()->with('error_messsage', 'Failed To Delete Item');
         }
+    }
+
+    public function clearcart(Request $request)
+    {
+        
+        DB::table('salescarts')->delete();
+        
+        return redirect()->back()->with('success_message', 'Seccessfully Cleared Bucket');
+       
     }
 }

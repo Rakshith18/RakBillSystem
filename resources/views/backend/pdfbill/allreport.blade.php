@@ -26,7 +26,7 @@
         <td>{{$all->name}}</td>
         <td>{{$all->quantity}}</td>
         <td>{{$all->price}}</td>
-        <td>{{$all->saller_name}}</td>
+        <td>{{$all->seller_name}}</td>
         <td>{{$all->created_at}}</td>
     </tr>
     @endforeach

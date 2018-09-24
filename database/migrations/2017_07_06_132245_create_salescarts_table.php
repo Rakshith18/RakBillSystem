@@ -19,7 +19,7 @@ class CreateSalescartsTable extends Migration
             $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('quantity');
             $table->double('price');
-            $table->string('saller_name');
+            $table->string('seller_name');
             $table->boolean('sales_status')->default(1);
             $table->dateTime('sales_date');
             $table->timestamps();

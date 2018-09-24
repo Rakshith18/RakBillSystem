@@ -34,7 +34,7 @@
                     <form action="{{route('salescart.delete',[$pc->id,$pc->product_id])}}" method="post">
                     <input type="hidden" name="_method" value="DELETE">
                         {{ csrf_field()}}
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('are you sure to delete?')" ><i class="fa fa-trash-o"></i></button>
+                        <button type="submit" class="btn btn-danger" id="btnDel" onclick="return confirm('are you sure to delete?')" ><i class="fa fa-trash-o"></i></button>
                     </form>
                 </div>
                
@@ -61,3 +61,32 @@
 
     </tbody>
 </table>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+    $('#btnDel').on('submit', function (e) {
+                e.preventDefault();
+                var url = $(this).attr('action');
+                var post = $(this).attr('method');
+                var data = $(this).serialize();
+                $.ajax({
+                    url: url,
+                    type: post,
+                    data: data,
+                    success: function (data) {
+                        refreshproduct();
+                        readsales();
+                        // readname();
+                        ajaxform();
+                        var m = "<div class='alert alert-info alert-block'> <button type='button' class='close' data-dismiss='alert'> x </button>" + data.success_message + "</div>";
+                        // alert(data.success_message);
+                        $('.resp').html(m);
+
+                        document.getElementById("btnDel").reset();
+                    }
+
+                });
+            });
+        });
+</script>

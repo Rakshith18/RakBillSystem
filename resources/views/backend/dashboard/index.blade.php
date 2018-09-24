@@ -75,8 +75,85 @@
         <div class="resp"></div>
         <br>
         <div class="row">
-            <div class="col-md-6">
+             <div class="col-md-6">
+            <form id="btnSave" action="{{route('sales.store')}}" method="post">
+            {{ csrf_field() }}
+
+            <div class="row">
+            <div class="col-md-12">
                 <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Customer Details</h2>
+                         <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li class="dropdown">
+                                <a id="refresh"><i class="fa fa-refresh"></i></a>
+                                <ul class="dropdown-menu" role="menu">
+                                </ul>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                         <div class="clearfix"></div>
+                     </div>
+                     <div class="x_content">
+                    @if($salescart->count() > 0)
+                        <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="customer_name">Name</label>
+                                <input type="text" class="form-control" name="customer_name" id="customer_name" placeholder="Customer name" value="{{$salescart[0]->customer_name}}" readonly="">
+                                <span class="error"><b>
+                                         @if($errors->has('customer_name'))
+                                            {{$errors->first('customer_name')}}
+                                         @endif</b></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-7">
+                        <div class="form-group">
+                                <label for="customer_address">Address</label>
+                                <input type="text" class="form-control" name="customer_address" id="customer_address" placeholder="Customer Address" value="{{$salescart[0]->customer_address}}" readonly="">
+                                <span class="error"><b>
+                                         @if($errors->has('customer_address'))
+                                            {{$errors->first('customer_address')}}
+                                         @endif</b></span>
+                            </div>
+                        </div>
+                        </div>
+                    @else
+                        <div class="row">
+                        <div class="col-md-5">
+                             <div class="form-group">
+                                <label for="customer_name">Name</label>
+                                <input type="text" class="form-control" name="customer_name" id="customer_name" placeholder="Customer name" required="">
+                                <span class="error"><b>
+                                         @if($errors->has('customer_name'))
+                                            {{$errors->first('customer_name')}}
+                                         @endif</b></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-7">
+                        <div class="form-group">
+                                <label for="customer_address">Address</label>
+                                <input type="text" class="form-control" name="customer_address" id="customer_address" placeholder="Customer Address" required="">
+                                <span class="error"><b>
+                                         @if($errors->has('customer_address'))
+                                            {{$errors->first('customer_address')}}
+                                         @endif</b></span>
+                            </div>
+                        </div>
+                        </div>
+                      
+                    @endif
+                        </div>
+                </div>
+            </div>
+        </div>
+            
+                  <div class="x_panel">
                     <div class="x_title">
                         <h2>Make Quick Sales
                             <small>Create Sales</small>
@@ -95,8 +172,7 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
-                        <form id="btnSave" action="{{route('sales.store')}}" method="post">
-                            {{ csrf_field() }}
+                       
                            <div class="form-group">
                                     <label for="product_id">Choose Product</label>
                                     <select class="form-control js-example-basic-single" id="product_id" name="product_id" data-placeholder="--Search Product--" required>
@@ -152,11 +228,11 @@
                             <div class="box-footer">
                                 <button type="submit" name="btnSave" class="btn btn-primary"> Make QuickSales </button>
                             </div>
-                        </form>
                     </div>
-                </div>
+                </div></form>
             </div>
-            <div class="col-md-6">
+                       
+                <div class="col-md-6">
                 <div class="x_panel">
                     <div class="x_title">
                         <h2>Quick Sales Billing
@@ -185,7 +261,11 @@
                         </div>
                     </div>
                 </div>
+                </div>
             </div>
+         
+        </div>
+            
         </div>
        <!--  <div class="row">
             <div class="col-md-12">
@@ -278,11 +358,17 @@
     </script>
     <script>
         $(document).ready(function () {
+            
+        $("#refresh").click(function(){
+            location.reload(true);
+        });
+    
             $.ajaxSetup({
                 headers: {
                     'X-CRF-TOKEN': $('meat[name = "csrf-token"]').attr('content')
                 }
             });
+           
             $('#btnSave').on('submit', function (e) {
                 e.preventDefault();
                 var url = $(this).attr('action');
@@ -295,19 +381,27 @@
                     success: function (data) {
                         refreshproduct();
                         readsales();
+                        // readname();
                         ajaxform();
                         var m = "<div class='alert alert-info alert-block'> <button type='button' class='close' data-dismiss='alert'> x </button>" + data.success_message + "</div>";
                         // alert(data.success_message);
                         $('.resp').html(m);
+                       
                         document.getElementById("btnSave").reset();
                     }
+
                 });
+                
+                $("#customer_name").attr('disabled','disabled').val('');
+                $("#customer_address").attr('disabled','disabled').val('');
+
             });
         });
         readsales();
         refreshproduct();
         readsales();
         refreshproduct();
+        // readname();
         ajaxform();
         function readsales() {
             $.ajax({
@@ -319,6 +413,18 @@
                 }
             })
         }
+        // function readname() {
+        //     $.ajax({
+        //         type: 'get',
+        //         url: "{{url('ajax-read-name')}}",
+        //         dataType: 'html',
+        //             success: function (resp) {
+        //                 console.log(resp);
+        //                 //$('#price').empty();
+        //                 $('#customer_name').val(resp);
+        //             }
+        //         });
+        // }
         function ajaxform() {
             $.ajax({
                 type: 'get',

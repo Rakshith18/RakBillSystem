@@ -78,6 +78,7 @@ Route::group(['middleware' => 'Revalidate'],function() {
         Route::post('/sales-store', ['as' => 'sales.store', 'uses' => 'backend\SalesController@store']);
         Route::get('/sales-list', ['as' => 'sales.list', 'uses' => 'backend\SalesController@index']);
         Route::get('/ajaxsales-list', ['as' => 'ajaxsales.list', 'uses' => 'backend\SalesController@ajaxlist']);
+        Route::get('/ajax-read-name', ['as' => 'ajaxread.name', 'uses' => 'backend\SalesController@ajaxreadname']);
         Route::get('/ajax-form', ['as' => 'ajax.form', 'uses' => 'backend\SalesController@ajaxform']);
         Route::get('/refresh-product', ['as' => 'refresh.product', 'uses' => 'backend\SalesController@refreshproduct']);
         Route::get('/sales-allpdf', ['as' => 'sales.printall', 'uses' => 'backend\SalesController@getallpdf']);
@@ -89,6 +90,7 @@ Route::group(['middleware' => 'Revalidate'],function() {
         Route::post('/savetosales', ['as' => 'save.sales', 'uses' => 'backend\SalesController@savetosales']);
         Route::delete('/delete-salescart/{id}/{pid}', ['as' => 'salescart.edit', 'uses' => 'backend\SalesController@editcart']);
         Route::delete('/delete-salescart/{id}/{pid}', ['as' => 'salescart.delete', 'uses' => 'backend\SalesController@deletecart']);
+        Route::get('/clear-salescart', ['as' => 'salescart.clearbucket', 'uses' => 'backend\SalesController@clearcart']);
 
 
         Route::get('/expenses-create', ['as' => 'expenses.create', 'uses' => 'backend\ExpensesController@create']);

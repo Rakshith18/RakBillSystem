@@ -65,15 +65,16 @@
                                 <tr>
                                     <th>Sl.No.</th>
                                     <th>Category Name</th>
-                                    <th>Name</th>
+                                    <th>Product Name</th>
                                     <th>Code</th>
-                                    <th>Quantity</th>
+                                    <th>Qty</th>
                                     <th>Stock</th>
-                                    <th>Price</th>
+                                    <th>Buy Price</th>
+                                    <th>Sell Price</th>
                                     <th>Tax</th>
                                     <th>Status</th>
-                                    <th>Created By</th>
-                                    <th>Modified By</th>
+                                    <th>Create By</th>
+                                    <th>Modify By</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -87,7 +88,8 @@
                                         <td>{{$pc->code}} </td>
                                         <td> {{$pc->quantity}}</td>
                                         <td> {{$pc->stock}}</td>
-                                        <td> {{$pc->price}}</td>
+                                        <td> {{$pc->buy_price}}</td>
+                                        <td> {{$pc->sell_price}}</td>
                                         <td> {{$pc->tax}}</td>
                                         <td>
                                             @if($pc->status == 1)
@@ -110,7 +112,7 @@
                                                         <button type="submit" class="btn btn-danger" onclick="return confirm('are you sure to delete?')" ><i class="fa fa-trash-o"></i></button>
                                                     </form>
                                                 </div>
-                                                <div class="col-md-2">
+                                                <div class="col-md-3">
                                                     <a href="{{route('stock.edit',$pc->id)}}" class="btn btn-info"><i class="fa fa-plus"></i> Stock Update</a>
                                                 </div>
                                             </div>

@@ -16,7 +16,7 @@
         <tr>
             <th> {{$i++}}</th>
             <td class="col-xs-3">{{$pc->name}} </td>
-            <td > {{$pc->quantity}}</td>
+            <td > {{$pc->sale_quantity}}</td>
             <td >{{$pc->tax}}</td>
             <td >{{$pc->price}} </td>
             <td>
@@ -27,10 +27,10 @@
                     <td><button type="submit" class="btn btn-danger" onclick="return confirm('are you sure to delete?')" ><i class="fa fa-trash-o"></i></button></td>
                 </form>--}}
              <div class="row">
-                <div class="col-md-5">
+                <!-- <div class="col-md-5">
                     <a href="" class="btn btn-info"><i class="fa fa-pencil"></i></a>
-                </div>
-                <div class="col-md-5">
+                </div> -->
+                <div class="col-md-4">
                     <form action="{{route('salescart.delete',[$pc->id,$pc->product_id])}}" method="post">
                     <input type="hidden" name="_method" value="DELETE">
                         {{ csrf_field()}}

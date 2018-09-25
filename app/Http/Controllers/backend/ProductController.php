@@ -50,7 +50,8 @@ class ProductController extends Controller
             'code' => 'required|unique:products',
             'quantity' => 'required',
             'measure'=>'required',
-            'price' => 'required',
+            'buy_price' => 'required',
+            'sell_price' => 'required',
             'tax' => 'required',
         ]);
         $message = Product::create([
@@ -60,7 +61,8 @@ class ProductController extends Controller
             'quantity' => $request->quantity,
             'measure'=>$request->measure,
             'stock' => $request->quantity,
-            'price' => $request->price,
+            'buy_price' => $request->buy_price,
+            'sell_price' => $request->sell_price,
             'tax' => $request->tax,
             'status' => $request->status,
             'created_by' => Auth::user()->username,
@@ -111,14 +113,16 @@ class ProductController extends Controller
             'productcategory_id' => 'required',
             'name' => 'required',
             'code' => 'required',
-            'price' => 'required',
+            'buy_price' => 'required',
+            'sell_price' => 'required',
             'tax' => 'required',
         ]);
         $pc = Product::find($id);
         $pc->productcategory_id = $request->productcategory_id;
         $pc->name = $request->name;
         $pc->code = $request->code;
-        $pc->price = $request->price;
+        $pc->buy_price = $request->buy_price;
+        $pc->sell_price = $request->sell_price;
         $pc->tax = $request->tax;
         $pc->status = $request->status;
         $pc->modified_by = Auth::user()->username;

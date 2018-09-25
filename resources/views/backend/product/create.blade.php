@@ -112,11 +112,19 @@
                                             @endif</b></span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="price">Price *</label>
-                                    <input type="number" class="form-control" id="price" name="price" placeholder="Enter price per Item">
+                                    <label for="buy_price">Buying Price *</label>
+                                    <input type="number" class="form-control" id="buy_price" name="buy_price" placeholder="Enter buy_price per Item">
                                     <span class="error"><b>
-                                         @if($errors->has('price'))
-                                                {{$errors->first('price')}}
+                                         @if($errors->has('buy_price'))
+                                                {{$errors->first('buy_price')}}
+                                            @endif</b></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="sell_price">Selling Price *</label>
+                                    <input type="number" class="form-control" id="sell_price" name="sell_price" placeholder="Enter sell_price per Item">
+                                    <span class="error"><b>
+                                         @if($errors->has('sell_price'))
+                                                {{$errors->first('sell_price')}}
                                             @endif</b></span>
                                 </div>
                                  <div class="form-group">

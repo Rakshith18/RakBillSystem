@@ -26,22 +26,22 @@ class SalesController extends Controller
     {
         $this->validate($request, [
             'product_id' => 'required',
-            'price' => 'required',
+            'sell_price' => 'required',
             'tax'=>'required',
-            'sales_quantity' => 'required',
+            'sale_quantity' => 'required',
             'customer_name' => 'required',
             'customer_address' => 'required',
         ]);
         if ($request->ajax()) {
             $sales = new Salescart();
             $sales->product_id = $request->product_id;  
-            $sales->quantity = $request->sales_quantity;
-            // if($sales->quantity<)
-            $total=$request->price * $request->sales_quantity;
+            $sales->sale_quantity = $request->sale_quantity;
+            // if($sale->quantity<)
+            $total=$request->sell_price * $request->sale_quantity;
             $taxPer=$request->tax*$total;
-            $taxAmt=$taxPer/100;
-            $sales->price = $total+$taxAmt;
-            $sales->tax=$request->tax;
+            $tax_amt=$taxPer/100;
+            $sales->tax_amt=$tax_amt;
+            $sales->price = $total+$tax_amt;
             $sales->sales_status = $request->sales_status;
             $sales->customer_name=$request->customer_name;
             $sales->customer_address=$request->customer_address;
@@ -49,7 +49,7 @@ class SalesController extends Controller
             $sales->sales_date = date('Y-m-d');
             if ($sales->save()) {
                 $product = Product::find($request->product_id);
-                $product->stock = $product->stock - $request->sales_quantity;
+                $product->stock = $product->stock - $request->sale_quantity;
                 if ($product->update()) {
                     return response(['success_message' => 'Successfully Made Sales']);
                 }
@@ -64,7 +64,7 @@ class SalesController extends Controller
     {
         $this->checkpermission('sales-list');
         $sales = Sale::join('products', 'products.id', '=', 'sales.product_id')
-            ->select('sales.*', 'products.name')
+            ->select('sales.*', 'products.*')
             ->orderBy('sales.created_at', 'DEC')
             ->get();
         return view('backend.sales.list', compact('sales'));
@@ -73,12 +73,12 @@ class SalesController extends Controller
     public function ajaxlist()
     {
         $sales = Salescart::join('products', 'products.id', '=', 'salescarts.product_id')
-            ->select('salescarts.*', 'products.name')
+            ->select('salescarts.*', 'products.*')
             ->orderBy('salescarts.created_at', 'DEC')
             ->get();
         return view('backend.sales.ajaxlist', compact('sales'));
     }
-    public function ajaxreadname()
+    public function readname()
     {
       $salescart = Salescart::where($request->customer_name)->get();
         echo $salescart[0]->customer_name;
@@ -103,10 +103,10 @@ class SalesController extends Controller
 
     }
 
-    public function getprice(Request $request)
+    public function getsell_price(Request $request)
     {
         $product = Product::where('id', $request->product_id)->get();
-        echo $product[0]->price;
+        echo $product[0]->sell_price;
     }
 
      public function gettax(Request $request)
@@ -125,7 +125,7 @@ class SalesController extends Controller
     public function getallpdf()
     {
         $report = Salescart::join('products', 'products.id', '=', 'salescarts.product_id')
-            ->select('salescarts.*', 'products.name')
+            ->select('salescarts.*', 'products.*')
             ->get();
             // echo "<pre>"; print_r($report); die;
         return view('backend.pdfbill.salesbill', compact('report'));
@@ -136,7 +136,7 @@ class SalesController extends Controller
         $start = $request->start;
         $end = $request->end;
         $report = Sale::join('products', 'products.id', 'sales.product_id')
-            ->select('sales.*', 'products.name')
+            ->select('sales.*', 'products.*')
             ->whereBetween('sales.sales_date', [$start, $end])
             ->get();
         $pdf = PDF::loadview('backend.pdfbill.allreport', compact('report', 'start', 'end'));
@@ -148,7 +148,7 @@ class SalesController extends Controller
         $start = $request->start;
         $end = $request->end;
         $report = Sale::join('products', 'products.id', 'sales.product_id')
-            ->select('sales.*', 'products.name')
+            ->select('sales.*', 'products.*')
             ->whereBetween('sales.sales_date', [$start, $end])
             ->get();
             
@@ -162,16 +162,16 @@ class SalesController extends Controller
         for ($i = 0; $i < $request->input('total_product'); $i++) {
             $od = [
                 'product_id' => $request['product_id'][$i],
-                'quantity' => $request['quantity'][$i],
-                'price' => $request['price'][$i],
-                'tax' => $request['tax'][$i],
+                'sale_quantity' => $request['sale_quantity'][$i],
+                'tax_amt' => $request['tax_amt'][$i],
+                'price' => $request['price'][$i],                
                 'customer_name' => $request['customer_name'][$i],
                 'customer_address' => $request['customer_address'][$i],
                 'sales_status' => $request['sales_status'][$i],
                 'seller_name' => Auth::user()->username,
                 'sales_date' => date('Y-m-d'),
             ];
-            // dd($od);
+            //dd($od);
             Sale::create($od);
         }
         DB::table('salescarts')->delete();
@@ -209,7 +209,7 @@ class SalesController extends Controller
     {
         $product = Product::find($pid);
         $salescart = Salescart::find($id);
-        $product->stock = $product->stock + $salescart->quantity;
+        $product->stock = $product->stock + $salescart->sale_quantity;
         if ($product->update()) {
             $salescart->delete();
             return redirect()->back()->with('success_message', 'Seccessfully Deleted Item');

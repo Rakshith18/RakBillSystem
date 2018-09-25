@@ -56,7 +56,6 @@ class DashboardController extends Controller
             }
         }
 
-
         $ccategory = Productcategory::all();
         $cproduct = Product::all();
         $totalcategory = count($ccategory);
@@ -70,7 +69,7 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public  function calendar()
+    public function calendar()
     {
         return view('backend.dashboard.calendar');
     }

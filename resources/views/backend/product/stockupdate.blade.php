@@ -14,16 +14,16 @@
                     <h3>Stock Management </h3>
                 </div>
                 <div class="title_right">
-                    <div class="col-md-8 col-sm-8 col-xs-12 form-group pull-right top_search">
-                        <div class="col-md-4 col-sm-4 col-xs-12 form-group top_search" style="padding-left: 100px;">
+                    <div class="col-md-6 col-sm-6 col-xs-12 form-group pull-right top_search">
+                        <div class="col-md-5 col-sm-5 col-xs-12 form-group top_search" >
                             <div class="input-group">
                                  <form action="{{route('stock.clear',$product->id)}}" method="post">
                                     {{ csrf_field()}}
-                                    <button type="submit" name="btnClear" class="btn btn-danger" ><i class="fa fa-bolt"></i> Clear Stock</button>
+                                    <button type="submit" class="btn btn-danger" ><i class="fa fa-bolt"></i> Clear Stock</button>
                                  </form>
                             </div>
                         </div>
-                        <div class="col-md-4 col-sm-4 col-xs-12 form-group top_search" style="padding-left: 100px;">
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group top_search">
                             <div class="input-group">
                                 <a href="{{route('product.list')}}" class="btn btn-success"><i class="fa fa-eye"></i> View Product</a>
                             </div>
@@ -89,7 +89,7 @@
                                 </div>
                                 <!-- /.box-body -->
                                 <div class="box-footer">
-                                    <button type="submit" name="btnCreate" class="btn btn-primary" >Update Stock</button>
+                                    <button type="submit" name="btnCreate" class="btn btn-primary" ><i class="fa fa-pencil"></i> Update Stock</button>
 
                                 </div>
                             </form>

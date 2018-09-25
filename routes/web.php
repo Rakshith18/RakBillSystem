@@ -85,8 +85,9 @@ Route::group(['middleware' => 'Revalidate'],function() {
         Route::post('/custom-report', ['as' => 'custom.report', 'uses' => 'backend\SalesController@getcustomreport']);
         Route::post('/custom-view', ['as' => 'custom.view', 'uses' => 'backend\SalesController@viewCustomReport']);
         Route::post('/getquantity', ['as' => 'sales.getquantity', 'uses' => 'backend\SalesController@getquantity']);
-        Route::post('/getprice', ['as' => 'sales.getprice', 'uses' => 'backend\SalesController@getprice']);
+        Route::post('/getsell_price', ['as' => 'sales.getsell_price', 'uses' => 'backend\SalesController@getsell_price']);
         Route::post('/gettax', ['as' => 'sales.gettax', 'uses' => 'backend\SalesController@gettax']);
+        Route::post('/readname', ['as' => 'sales.readname', 'uses' => 'backend\SalesController@readname']);
         Route::post('/savetosales', ['as' => 'save.sales', 'uses' => 'backend\SalesController@savetosales']);
         Route::delete('/delete-salescart/{id}/{pid}', ['as' => 'salescart.edit', 'uses' => 'backend\SalesController@editcart']);
         Route::delete('/delete-salescart/{id}/{pid}', ['as' => 'salescart.delete', 'uses' => 'backend\SalesController@deletecart']);

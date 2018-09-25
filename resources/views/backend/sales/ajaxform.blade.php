@@ -9,16 +9,16 @@
             @php($i = 0)
             @foreach($salescart as $sc)
                 <input type="hidden" name="product_id[{{$i}}]" value="{{$sc->product_id}}">
-                <input type="hidden" name="quantity[{{$i}}]" value="{{$sc->quantity}}">
+                <input type="hidden" name="sale_quantity[{{$i}}]" value="{{$sc->sale_quantity}}">
                 <input type="hidden" name="price[{{$i}}]" value="{{$sc->price}}">
-                <input type="hidden" name="tax[{{$i}}]" value="{{$sc->tax}}">
+                <input type="hidden" name="tax_amt[{{$i}}]" value="{{$sc->tax_amt}}">
                 <input type="hidden" name="customer_name[{{$i}}]" value="{{$sc->customer_name}}">
                 <input type="hidden" name="customer_address[{{$i}}]" value="{{$sc->customer_address}}">
                 <input type="hidden" name="sales_status[{{$i}}]" value="{{$sc->sales_status}}">
                 @php($i++)
             @endforeach
             <input type="hidden" name="total_product" value="{{$i}}">
-            <button type="submit"  class="btn btn-success" target="_blank" onclick="return confirm('Do You Print Out The Bill ?')"><i class="fa fa-pen"></i> Update Sales Bucket</button>
+            <button type="submit" id="upb" class="btn btn-success" target="_blank" onclick="return confirm('Do You Print Out The Bill ?')"><i class="fa fa-pen"></i> Update Sales Bucket</button>
         </form>
     </div>
     <div class="col-md-4">
@@ -31,7 +31,7 @@
 <!-- <script type="text/javascript">
     $(document).ready(function () {
 
-        $('#clearbucket').on('click', function (e) {
+        $('#upb').on('submit', function (e) {
                 e.preventDefault();
                 var url = $(this).attr('action');
                 var post = $(this).attr('method');
@@ -41,16 +41,17 @@
                     type: post,
                     data: data,
                     success: function (data) {
-                        refreshproduct();
-                        readsales();
-                        ajaxform();
-                        var m = "<div class='alert alert-info alert-block'> <button type='button' class='close' data-dismiss='alert'> x </button>" + data.success_message + "</div>";
-                        // alert(data.success_message);
-                        $('.resp').html(m);
-                        document.getElementById("#clearbucket").reset();
+                        printorder();
+                                             
+                        document.getElementById("btnSave").reset();
                     }
+
                 });
+                
+                $("#customer_name").attr('readonly','true');
+                $("#customer_address").attr('readonly','true');
+
             });
     });
 
-</script> -->
+</script>  -->

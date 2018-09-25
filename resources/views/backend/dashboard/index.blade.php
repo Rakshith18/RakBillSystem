@@ -27,33 +27,35 @@
         <div class="row tile_count" style="font-size: x-large;">
             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                 <div class="info-box blue-bg bg-red" style="text-align: center;border-radius: 5px;">
-                    <i class="fa fa-money"></i>
-                    <div class="count">
-                        Rs. {{$creditsale}}
-                    </div>
+                    <i class="fa fa-money"></i><br>
+                    <span>Rs. </span><span class="counter">{{$creditsale}}</span>
+                    
                     <div class="title">Current Credit Balance</div>
                 </div><!--/.info-box-->
             </div><!--/.col-->
 
             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                 <div class="info-box brown-bg bg-primary" style="text-align: center;border-radius: 5px;">
-                    <i class="fa fa-shopping-cart"></i>
-                    <div class="count">Rs. {{$todayrevenue}}</div>
+                    <i class="fa fa-shopping-cart"></i><br>
+                    <span>Rs. </span><span class="counter">{{$todayrevenue}}</span>
+                   
                     <div class="title">Today's Sales Revenue</div>
                 </div><!--/.info-box-->
             </div><!--/.col-->
 
             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                 <div class="info-box dark-bg bg-red" style="text-align: center;border-radius: 5px;">
-                    <i class="fa fa-thumbs-o-up"></i>
-                    <div class="count">{{$totalcategory}}</div>
+                    <i class="fa fa-thumbs-o-up"></i><br>
+                      <span class="counter">{{$totalcategory}}</span>
+                   
                     <div class="title">Total Product Category</div>
                 </div><!--/.info-box-->
             </div><!--/.col-->
             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                 <div class="info-box dark-bg bg-primary" style="text-align: center;border-radius: 5px;">
-                    <i class="fa fa-product-hunt"></i>
-                    <div class="count">{{$totalproduct}}</div>
+                    <i class="fa fa-product-hunt"></i><br>
+                      <span class="counter">{{$totalproduct}}</span>
+                   
                     <div class="title">Total No. of Products</div>
                 </div><!--/.info-box-->
             </div><!--/.col-->
@@ -192,27 +194,27 @@
                                          @endif</b></span>
                             </div>
                             <div class="form-group">
-                                <label for="price">Price per/Measure</label>
-                                <input type="number" class="form-control" name="price" id="price" placeholder="price" required>
+                                <label for="sell_price">Price per/Measure</label>
+                                <input type="number" class="form-control" name="sell_price" id="sell_price" placeholder="Price" required>
                                 <span class="error"><b>
-                                         @if($errors->has('price'))
-                                            {{$errors->first('price')}}
+                                         @if($errors->has('sell_price'))
+                                            {{$errors->first('sell_price')}}
                                          @endif</b></span>
                             </div>
                               <div class="form-group">
                                 <label for="tax">Tax </label>
-                                <input type="text" class="form-control" name="tax" id="tax" placeholder="tax" >
+                                <input type="text" class="form-control" name="tax" id="tax" placeholder="tax" readonly="" >
                                 <span class="error"><b>
                                          @if($errors->has('tax'))
                                             {{$errors->first('tax')}}
                                          @endif</b></span>
                             </div>
                             <div class="form-group">
-                                <label for="sales_quantity">Sales Quantity</label>
-                                <input type="number" min="1" value="1" class="form-control" id="sales_quantity" name="sales_quantity" placeholder="Quantity" required>
+                                <label for="sale_quantity">Sales Quantity</label>
+                                <input type="number" min="1" class="form-control" id="sale_quantity" name="sale_quantity" placeholder="Quantity" required>
                                 <span class="error"><b>
-                                         @if($errors->has('sales_quantity'))
-                                            {{$errors->first('sales_quantity')}}
+                                         @if($errors->has('sale_quantity'))
+                                            {{$errors->first('sale_quantity')}}
                                          @endif</b></span>
                             </div>
 
@@ -300,10 +302,32 @@
 @endsection
 
 @section('script')
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.min.js"></script>
+
     <script src="{{asset('backend/plugins/select2.min.js')}}"></script>
-    <script type="text/javascript">
+    <script >
+        jQuery(document).ready(function($) {
+            $('.counter').counterUp({
+                delay: 10,
+                time: 1000
+            });
+        });
+        $(document).load(function() {
+             $.ajax({
+                 type: "get",
+                 url: 'SalesController@clearcart',
+                 data: "",
+                success: function() {
+                 console.log("Geodata sent");
+            }
+         })
+        });
+
         $(document).ready(function () {
-            $(".js-example-basic-single").select2();
+                $(".js-example-basic-single").select2();
+
         });
     </script>
     <script type="text/javascript">
@@ -320,13 +344,16 @@
                         console.log(resp);
                         //$('#quantity').empty();
                         $('#stock').val(resp);
+                        $('#sale_quantity').val('1');
+                        
+
                     }
                 });
 
             });
             $('#product_id').on('change', function () {
                 var prdid = $(this).val();
-                var path = 'getprice';
+                var path = 'getsell_price';
                 $.ajax({
                     url: path,
                     method: 'post',
@@ -334,8 +361,8 @@
                     dataType: 'text',
                     success: function (resp) {
                         console.log(resp);
-                        //$('#price').empty();
-                        $('#price').val(resp);
+                        //$('#sell_price').empty();
+                        $('#sell_price').val(resp);
                     }
                 });
             });
@@ -349,7 +376,22 @@
                     dataType: 'text',
                     success: function (resp) {
                         console.log(resp);
-                        //$('#price').empty();
+                        //$('#sell_price').empty();
+                        $('#tax').val(resp);
+                    }
+                });
+            });
+               $('#product_id').on('change', function () {
+                var prdid = $(this).val();
+                var path = 'gettax';
+                $.ajax({
+                    url: path,
+                    method: 'post',
+                    data: {'product_id': prdid, '_token': $('input[name=_token]').val()},
+                    dataType: 'text',
+                    success: function (resp) {
+                        console.log(resp);
+                        //$('#sell_price').empty();
                         $('#tax').val(resp);
                     }
                 });
@@ -391,6 +433,19 @@
                     }
 
                 });
+             
+                var path = 'readname';
+                $.ajax({
+                    url: path,
+                    method: 'post',
+                    data: '',
+                    dataType: 'text',
+                    success: function (resp) {
+                        console.log(resp);
+                        $('#customer_name').empty();
+                        $('#customer_name').val(resp);
+                    }
+                });
                 
                 $("#customer_name").attr('readonly','true');
                 $("#customer_address").attr('readonly','true');
@@ -420,7 +475,7 @@
         //         dataType: 'html',
         //             success: function (resp) {
         //                 console.log(resp);
-        //                 //$('#price').empty();
+        //                 //$('#sell_price').empty();
         //                 $('#customer_name').val(resp);
         //             }
         //         });

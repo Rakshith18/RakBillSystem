@@ -85,11 +85,11 @@
                                          @endif</b></span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="price">Price per/Measure</label>
-                                    <input type="number" class="form-control" name="price" id="price" placeholder="price" required>
+                                    <label for="sell_price">Price per/Measure</label>
+                                    <input type="number" class="form-control" name="sell_price" id="sell_price" placeholder="sell_price" required>
                                     <span class="error"><b>
-                                         @if($errors->has('price'))
-                                                {{$errors->first('price')}}
+                                         @if($errors->has('sell_price'))
+                                                {{$errors->first('sell_price')}}
                                          @endif</b></span>
                                 </div>
                                 <div class="form-group">
@@ -187,7 +187,7 @@
                     dataType: 'text',
                     success: function (resp) {
                         console.log(resp);
-                        //$('#price').empty();
+                        //$('#sell_price').empty();
                         $('#tax').val(resp);
                     }
                 });
@@ -203,8 +203,8 @@
                     dataType: 'text',
                     success: function (resp) {
                         console.log(resp);
-                        $('#price').empty();
-                        $('#price').val(resp);
+                        $('#sell_price').empty();
+                        $('#sell_price').val(resp);
                     }
                 });
             });

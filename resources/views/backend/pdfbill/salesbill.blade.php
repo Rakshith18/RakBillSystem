@@ -19,14 +19,7 @@
 
     <p>Customer Name : {{$report[0]->customer_name}}&nbsp;{{$report[0]->customer_address}}</p>
 
-    <p> 
-                                <label for="gst">GST Number :</label>
-                                <input type="number" id="gst" name="gst" placeholder="GST Number">
-                                <span class="error"><b>
-                                         @if($errors->has('gst'))
-                                            {{$errors->first('gst')}}
-                                         @endif</b></span>
-                            </p>
+    <p>GST Number : {{$report[0]->gst_number}}</p>
 
     <p>Invoice Number : 
     <p>Date : <?php

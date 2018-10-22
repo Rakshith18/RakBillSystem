@@ -76,12 +76,7 @@
             @endif
         <div class="resp"></div>
         <br>
-        <div class="row">
-             <div class="col-md-6">
-            <form id="btnSave" action="{{route('sales.store')}}" method="post">
-            {{ csrf_field() }}
-
-            <div class="row">
+         <div class="row">
             <div class="col-md-12">
                 <div class="x_panel">
                     <div class="x_title">
@@ -100,7 +95,7 @@
                          <div class="clearfix"></div>
                      </div>
                      <div class="x_content">
-                    @if($salescart->count() > 0)
+                   <!--  @if($salescart->count() > 0)
                         <div class="row">
                         <div class="col-md-5">
                             <div class="form-group">
@@ -124,11 +119,15 @@
                             </div>
                         </div>
                         </div>
-                    @else
+                    @else -->
+                        
+                        <form id="btnCustomer" action="{{route('sales.customer')}}" method="post">
+                        {{ csrf_field() }}
+                        
                         <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-3">
                              <div class="form-group">
-                                <label for="customer_name">Name</label>
+                                <label for="customer_name">Name *</label>
                                 <input type="text" class="form-control" name="customer_name" id="customer_name" placeholder="Customer name" required="">
                                 <span class="error"><b>
                                          @if($errors->has('customer_name'))
@@ -137,9 +136,9 @@
                             </div>
                         </div>
 
-                        <div class="col-md-7">
+                        <div class="col-md-3">
                         <div class="form-group">
-                                <label for="customer_address">Address</label>
+                                <label for="customer_address">Address *</label>
                                 <input type="text" class="form-control" name="customer_address" id="customer_address" placeholder="Customer Address" required="">
                                 <span class="error"><b>
                                          @if($errors->has('customer_address'))
@@ -147,13 +146,47 @@
                                          @endif</b></span>
                             </div>
                         </div>
+                       
+                        <div class="col-md-3">
+                             <div class="form-group">
+                                <label for="phone_number">Phone Number</label>
+                                <input type="text" class="form-control" name="phone_number" id="phone_number" placeholder="Phone Number">
+                                <span class="error"><b>
+                                         @if($errors->has('phone_number'))
+                                            {{$errors->first('phone_number')}}
+                                         @endif</b></span>
+                            </div>
                         </div>
+
+                        <div class="col-md-3">
+                        <div class="form-group">
+                                <label for="gst_number">GST Number</label>
+                                <input type="text" class="form-control" name="gst_number" id="gst_number" placeholder="GST Number">
+                                <span class="error"><b>
+                                         @if($errors->has('gst_number'))
+                                            {{$errors->first('gst_number')}}
+                                         @endif</b></span>
+                            </div>
+                        </div>
+                       <div class="col-md-4"></div>
+                        <div class="col-md-6">
+                                <button type="submit" name="btnCustomer" id="btnCst" class="btn btn-primary"> Make Billing </button>
+                            </div>
+                        </div>
+                    </form>
+                        
                       
                     @endif
                         </div>
                 </div>
             </div>
         </div>
+        <div class="row">
+             <div class="col-md-6">
+            <form id="btnSave" action="{{route('sales.store')}}" method="post">
+            {{ csrf_field() }}
+
+           
             
                   <div class="x_panel">
                     <div class="x_title">
@@ -174,6 +207,15 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
+                        <div class="form-group">
+                                   
+                                    <input type="number" class="form-control" id="customer_id" name="customer_id">
+                                    <span class="error"><b>
+                                       @if($errors->has('customer_id'))
+                                              {{$errors->first('customer_id')}}
+                                       @endif</b>
+                                    </span>
+                                </div>
                        
                            <div class="form-group">
                                     <label for="product_id">Choose Product</label>
@@ -269,32 +311,7 @@
         </div>
             
         </div>
-       <!--  <div class="row">
-            <div class="col-md-12">
-                <div class="x_panel">
-                    <div class="x_title">
-                        <h2>Calendar Events
-                            <small>Sessions</small>
-                        </h2>
-                        <ul class="nav navbar-right panel_toolbox">
-                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                   aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                <ul class="dropdown-menu" role="menu">
-                                </ul>
-                            </li>
-                            <li><a class="close-link"><i class="fa fa-close"></i></a>
-                            </li>
-                        </ul>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="x_content">
-                        <div id='calendar'></div>
-                    </div>
-                </div>
-            </div> -->
+     
         </div>
         <br/>
     </div>
@@ -314,24 +331,27 @@
                 time: 1000
             });
         });
-        $(document).load(function() {
-             $.ajax({
-                 type: "get",
-                 url: 'SalesController@clearcart',
-                 data: "",
-                success: function() {
-                 console.log("Geodata sent");
-            }
-         })
-        });
+        // $(document).load(function() {
+
+        //      $.ajax({
+        //          type: "get",
+        //          url: 'SalesController@clearcart',
+        //          data: "",
+        //         success: function() {
+        //          console.log("Geodata sent");
+        //     }
+        //  })
+        // });
 
         $(document).ready(function () {
                 $(".js-example-basic-single").select2();
 
         });
     </script>
+
     <script type="text/javascript">
         $(document).ready(function () {
+
             $('#product_id').on('change', function () {
                 var prdid = $(this).val();
                 var path = 'getquantity';
@@ -351,6 +371,7 @@
                 });
 
             });
+
             $('#product_id').on('change', function () {
                 var prdid = $(this).val();
                 var path = 'getsell_price';
@@ -366,7 +387,8 @@
                     }
                 });
             });
-               $('#product_id').on('change', function () {
+
+            $('#product_id').on('change', function () {
                 var prdid = $(this).val();
                 var path = 'gettax';
                 $.ajax({
@@ -381,7 +403,8 @@
                     }
                 });
             });
-               $('#product_id').on('change', function () {
+
+            $('#product_id').on('change', function () {
                 var prdid = $(this).val();
                 var path = 'gettax';
                 $.ajax({
@@ -398,8 +421,37 @@
             });
         });
     </script>
+
     <script>
         $(document).ready(function () {
+
+        $('#btnCustomer').on('submit', function (e) {
+                e.preventDefault();
+                var url = $(this).attr('action');
+                var post = $(this).attr('method');
+                var data = $(this).serialize();
+                $.ajax({
+                    url: url,
+                    type: post,
+                    data: data,
+                    success: function (data) {
+                       
+                        var m = "<div class='alert alert-success alert-block'> <button type='button' class='close' data-dismiss='alert'> x </button>" + data.success_message + "</div>";
+                        // alert(data.success_message);
+                        $('.resp').html(m);
+                        readcustomer();
+                       
+                        document.getElementById("btnCustomer").reset();
+                    }
+
+                });
+                $("#customer_name").attr('readonly','true');
+                $("#customer_address").attr('readonly','true');
+                $("#phone_number").attr('readonly','true');
+                $("#gst_number").attr('readonly','true');
+                $("#btnCst").hide();
+
+        });
             
         $("#refresh").click(function(){
             location.reload(true);
@@ -410,8 +462,9 @@
                     'X-CRF-TOKEN': $('meat[name = "csrf-token"]').attr('content')
                 }
             });
-           
-            $('#btnSave').on('submit', function (e) {
+
+
+        $('#btnSave').on('submit', function (e) {
                 e.preventDefault();
                 var url = $(this).attr('action');
                 var post = $(this).attr('method');
@@ -422,8 +475,7 @@
                     data: data,
                     success: function (data) {
                         refreshproduct();
-                        readsales();
-                        // readname();
+                        readsales();                      
                         ajaxform();
                         var m = "<div class='alert alert-info alert-block'> <button type='button' class='close' data-dismiss='alert'> x </button>" + data.success_message + "</div>";
                         // alert(data.success_message);
@@ -434,30 +486,30 @@
 
                 });
              
-                var path = 'readname';
-                $.ajax({
-                    url: path,
-                    method: 'post',
-                    data: '',
-                    dataType: 'text',
-                    success: function (resp) {
-                        console.log(resp);
-                        $('#customer_name').empty();
-                        $('#customer_name').val(resp);
-                    }
-                });
-                
-                $("#customer_name").attr('readonly','true');
-                $("#customer_address").attr('readonly','true');
-
             });
         });
         readsales();
         refreshproduct();
         readsales();
-        refreshproduct();
-        // readname();
+        refreshproduct();        
         ajaxform();
+
+        function readcustomer() {
+                var prdid = $(this).val();
+                var path = '/ajax-customer';
+                $.ajax({
+                    url: path,
+                    method: 'get',                    
+                    dataType: 'text',
+                    success: function (resp) {
+                        console.log(resp);
+                       
+                        $('#customer_id').val(resp);   
+
+                    }
+                });
+            };
+
         function readsales() {
             $.ajax({
                 type: 'get',
@@ -468,18 +520,7 @@
                 }
             })
         }
-        // function readname() {
-        //     $.ajax({
-        //         type: 'get',
-        //         url: "{{url('ajax-read-name')}}",
-        //         dataType: 'html',
-        //             success: function (resp) {
-        //                 console.log(resp);
-        //                 //$('#sell_price').empty();
-        //                 $('#customer_name').val(resp);
-        //             }
-        //         });
-        // }
+
         function ajaxform() {
             $.ajax({
                 type: 'get',
@@ -500,6 +541,7 @@
                 }
             })
         }
+
         function printorder() {
             $.ajax({
                 url: "{{url('sales-allpdf')}}",

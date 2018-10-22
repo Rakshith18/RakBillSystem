@@ -9,11 +9,10 @@
             @php($i = 0)
             @foreach($salescart as $sc)
                 <input type="hidden" name="product_id[{{$i}}]" value="{{$sc->product_id}}">
+                <input type="hidden" name="customer_id[{{$i}}]" value="{{$sc->customer_id}}">
                 <input type="hidden" name="sale_quantity[{{$i}}]" value="{{$sc->sale_quantity}}">
                 <input type="hidden" name="price[{{$i}}]" value="{{$sc->price}}">
                 <input type="hidden" name="tax_amt[{{$i}}]" value="{{$sc->tax_amt}}">
-                <input type="hidden" name="customer_name[{{$i}}]" value="{{$sc->customer_name}}">
-                <input type="hidden" name="customer_address[{{$i}}]" value="{{$sc->customer_address}}">
                 <input type="hidden" name="sales_status[{{$i}}]" value="{{$sc->sales_status}}">
                 @php($i++)
             @endforeach

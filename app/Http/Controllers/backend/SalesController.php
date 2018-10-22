@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Models\Product;
 use App\Models\Sale;
 use App\Models\Salescart;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -26,15 +27,16 @@ class SalesController extends Controller
     {
         $this->validate($request, [
             'product_id' => 'required',
+            'customer_id' => 'required',
             'sell_price' => 'required',
             'tax'=>'required',
             'sale_quantity' => 'required',
-            'customer_name' => 'required',
-            'customer_address' => 'required',
+            
         ]);
         if ($request->ajax()) {
             $sales = new Salescart();
-            $sales->product_id = $request->product_id;  
+            $sales->product_id = $request->product_id;
+            $sales->customer_id = $request->customer_id;  
             $sales->sale_quantity = $request->sale_quantity;
             // if($sale->quantity<)
             $total=$request->sell_price * $request->sale_quantity;
@@ -43,8 +45,6 @@ class SalesController extends Controller
             $sales->tax_amt=$tax_amt;
             $sales->price = $total+$tax_amt;
             $sales->sales_status = $request->sales_status;
-            $sales->customer_name=$request->customer_name;
-            $sales->customer_address=$request->customer_address;
             $sales->seller_name = Auth::user()->username;
             $sales->sales_date = date('Y-m-d');
             if ($sales->save()) {
@@ -60,30 +60,69 @@ class SalesController extends Controller
         }
     }
 
+    public function storecustomer(Request $request)
+    {
+         $this->validate($request, [
+            'customer_name' =>'required',
+            'customer_address' =>'required',
+        ]);
+
+         if ($request->ajax()) {
+            $customer= new Customer();
+            $customer->customer_name = $request->customer_name;
+            $customer->customer_address = $request->customer_address;
+            $customer->phone_number = $request->phone_number;
+            $customer->gst_number = $request->gst_number;
+
+            if ($customer->save()) {
+               
+                    return response(['success_message' => 'Successfully Added Customer']);
+                }
+            }
+
+        else {
+            return response(['error_message' => 'Failed To Add Customer']);
+        }
+
+
+    }
+
     public function index()
     {
         $this->checkpermission('sales-list');
         $sales = Sale::join('products', 'products.id', '=', 'sales.product_id')
+            // ->join('customers', 'customers.id', '=', 'sales.customer_id')
             ->select('sales.*', 'products.*')
             ->orderBy('sales.created_at', 'DEC')
             ->get();
+        // $sales = Sales::with(['customer','product'])->get();
+          
+
         return view('backend.sales.list', compact('sales'));
     }
 
     public function ajaxlist()
     {
-        $sales = Salescart::join('products', 'products.id', '=', 'salescarts.product_id')
+        // $sales = Salescart::with('products', 'customers')->get();
+
+         $sales = Salescart::join('products', 'products.id', '=', 'salescarts.product_id')
             ->select('salescarts.*', 'products.*')
             ->orderBy('salescarts.created_at', 'DEC')
             ->get();
+            dd($sales);
+         
         return view('backend.sales.ajaxlist', compact('sales'));
     }
-    public function readname()
+     public function ajaxcustomer()
     {
-      $salescart = Salescart::where($request->customer_name)->get();
-        echo $salescart[0]->customer_name;
+        $customer = DB::table('Customer')->get();
+        return view ('backend.dashboard.index')->with('Customer',$customer);
+        $customer = Customer::get();
+        echo $customer[0]->customer_id;
+        // dd($customer);
+        
     }
-
+   
     public function ajaxform()
     {
         $salescart = Salescart::all();
@@ -125,8 +164,10 @@ class SalesController extends Controller
     public function getallpdf()
     {
         $report = Salescart::join('products', 'products.id', '=', 'salescarts.product_id')
+            // ->join('customers', 'customer_id', '=', 'salescarts.customer_id')
             ->select('salescarts.*', 'products.*')
             ->get();
+
             // echo "<pre>"; print_r($report); die;
         return view('backend.pdfbill.salesbill', compact('report'));
     }
@@ -162,11 +203,10 @@ class SalesController extends Controller
         for ($i = 0; $i < $request->input('total_product'); $i++) {
             $od = [
                 'product_id' => $request['product_id'][$i],
+                'customer_id' => $request['customer_id'][$i],
                 'sale_quantity' => $request['sale_quantity'][$i],
                 'tax_amt' => $request['tax_amt'][$i],
                 'price' => $request['price'][$i],                
-                'customer_name' => $request['customer_name'][$i],
-                'customer_address' => $request['customer_address'][$i],
                 'sales_status' => $request['sales_status'][$i],
                 'seller_name' => Auth::user()->username,
                 'sales_date' => date('Y-m-d'),

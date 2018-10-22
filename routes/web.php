@@ -76,20 +76,21 @@ Route::group(['middleware' => 'Revalidate'],function() {
 
         Route::get('/sales-create', ['as' => 'sales.create', 'uses' => 'backend\SalesController@create']);
         Route::post('/sales-store', ['as' => 'sales.store', 'uses' => 'backend\SalesController@store']);
+        Route::post('/sales-customer', ['as' => 'sales.customer', 'uses' => 'backend\SalesController@storecustomer']);
         Route::get('/sales-list', ['as' => 'sales.list', 'uses' => 'backend\SalesController@index']);
         Route::get('/ajaxsales-list', ['as' => 'ajaxsales.list', 'uses' => 'backend\SalesController@ajaxlist']);
-        Route::get('/ajax-read-name', ['as' => 'ajaxread.name', 'uses' => 'backend\SalesController@ajaxreadname']);
+         Route::get('/ajax-customer', ['as' => 'ajax.customer', 'uses' => 'backend\SalesController@ajaxcustomer']);
         Route::get('/ajax-form', ['as' => 'ajax.form', 'uses' => 'backend\SalesController@ajaxform']);
         Route::get('/refresh-product', ['as' => 'refresh.product', 'uses' => 'backend\SalesController@refreshproduct']);
+
         Route::get('/sales-allpdf', ['as' => 'sales.printall', 'uses' => 'backend\SalesController@getallpdf']);
         Route::post('/custom-report', ['as' => 'custom.report', 'uses' => 'backend\SalesController@getcustomreport']);
         Route::post('/custom-view', ['as' => 'custom.view', 'uses' => 'backend\SalesController@viewCustomReport']);
         Route::post('/getquantity', ['as' => 'sales.getquantity', 'uses' => 'backend\SalesController@getquantity']);
         Route::post('/getsell_price', ['as' => 'sales.getsell_price', 'uses' => 'backend\SalesController@getsell_price']);
         Route::post('/gettax', ['as' => 'sales.gettax', 'uses' => 'backend\SalesController@gettax']);
-        Route::post('/readname', ['as' => 'sales.readname', 'uses' => 'backend\SalesController@readname']);
         Route::post('/savetosales', ['as' => 'save.sales', 'uses' => 'backend\SalesController@savetosales']);
-        Route::delete('/delete-salescart/{id}/{pid}', ['as' => 'salescart.edit', 'uses' => 'backend\SalesController@editcart']);
+        Route::delete('/edit-salescart/{id}/{pid}', ['as' => 'salescart.edit', 'uses' => 'backend\SalesController@editcart']);
         Route::delete('/delete-salescart/{id}/{pid}', ['as' => 'salescart.delete', 'uses' => 'backend\SalesController@deletecart']);
         Route::get('/clear-salescart', ['as' => 'salescart.clearbucket', 'uses' => 'backend\SalesController@clearcart']);
 

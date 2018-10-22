@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Productcategory;
 use App\Models\Sale;
 use App\Models\Salescart;
+use App\Models\Customer;
 use App\Models\Withdraw;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
